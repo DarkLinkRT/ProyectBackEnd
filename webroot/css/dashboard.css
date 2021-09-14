@@ -1,0 +1,23 @@
+/*Design for welcome dashboard*/
+.bg-analytics {
+    background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7)); 
+}
+    
+.bg-analytics .avatar {
+    margin-bottom: 2rem; 
+}
+    
+.img-left {
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0; 
+}
+    
+.img-right {
+    width: 175px;
+    position: absolute;
+    top: 0;
+    right: 0; 
+}
+/*End design*/

@@ -99,7 +99,7 @@ class CoGroupsCoPermissionsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+    
         $coGroupsCoPermission = $this->CoGroupsCoPermissions->get($id);
         if ($this->CoGroupsCoPermissions->delete($coGroupsCoPermission)) {
             $this->Flash->success(__('The co groups co permission has been deleted.'));

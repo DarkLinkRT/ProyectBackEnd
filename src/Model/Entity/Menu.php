@@ -22,7 +22,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CoMenu[] $co_menus
  * @property \App\Model\Entity\CoGroup[] $co_groups
  */
-class CoMenu extends Entity
+class Menu extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -34,7 +34,7 @@ class CoMenu extends Entity
      * @var array
      */
     protected $_accessible = [
-        'co_menu_id' => true,
+        'menu_id' => true,
         'icon' => true,
         'name' => true,
         'href' => true,
@@ -43,7 +43,7 @@ class CoMenu extends Entity
         'deleted' => true,
         'created' => true,
         'modified' => true,
-        'co_menus' => true,
-        'co_groups' => true,
+        'menus' => true,
+        'roles' => true,
     ];
 }

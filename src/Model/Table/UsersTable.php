@@ -49,16 +49,9 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('CoGroups', [
-            'foreignKey' => 'co_group_id',
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
             'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Genders', [
-            'foreignKey' => 'gender_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('CatLocalities', [
-            'foreignKey' => 'cat_locality_id',
         ]);
     }
 
@@ -138,10 +131,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['co_group_id'], 'CoGroups'), ['errorField' => 'co_group_id']);
-        $rules->add($rules->existsIn(['gender_id'], 'Genders'), ['errorField' => 'gender_id']);
-        $rules->add($rules->existsIn(['cat_locality_id'], 'CatLocalities'), ['errorField' => 'cat_locality_id']);
-
+        $rules->add($rules->existsIn(['role_id'], 'Roles'), ['errorField' => 'role_id']);
         return $rules;
     }
 }

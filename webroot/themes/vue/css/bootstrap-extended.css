@@ -1253,7 +1253,7 @@ html [type="button"],
     .header-navbar .navbar-container ul.nav li .scrollable-container {
       position: relative; }
     .header-navbar .navbar-container .dropdown-menu-media {
-      width: 26rem; }
+      width: 40rem; }
       .header-navbar .navbar-container .dropdown-menu-media .media-list .media {
         padding: 1rem;
         border: none;
@@ -1606,11 +1606,13 @@ body[data-col="1-column"] .header-navbar.floating-nav {
   margin-bottom: 0.75rem; }
 
 .card {
+  margin: 1em 2.8em;
   margin-bottom: 2.2rem;
   border: none;
   border-radius: 0.5rem;
   box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-  transition: all .3s ease-in-out; }
+  transition: all .3s ease-in-out;
+  }
   .card .card {
     box-shadow: none !important; }
   .card .card-subtitle {
@@ -2178,7 +2180,8 @@ ul.list-inline.list-inline-pipe > li + li:before {
   padding-right: 2px; }
 
 .list-group .list-group-item {
-  line-height: 1.5; }
+  line-height: 1.5; 
+  margin: .5em 0;}
   .list-group .list-group-item.active:hover {
     background-color: #7367f0; }
   .list-group .list-group-item.active:focus {

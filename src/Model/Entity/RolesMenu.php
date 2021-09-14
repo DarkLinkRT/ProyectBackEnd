@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CoGroup $co_group
  * @property \App\Model\Entity\CoMenu $co_menu
  */
-class CoGroupsCoMenu extends Entity
+class RolesMenu extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -27,9 +27,9 @@ class CoGroupsCoMenu extends Entity
      * @var array
      */
     protected $_accessible = [
-        'co_group_id' => true,
-        'co_menu_id' => true,
-        'co_group' => true,
-        'co_menu' => true,
+        'role_id' => true,
+        'menu_id' => true,
+        'role' => true,
+        'menu' => true,
     ];
 }

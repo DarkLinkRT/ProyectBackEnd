@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * CoPermissions Controller
+ * Permissions Controller
  *
- * @property \App\Model\Table\CoPermissionsTable $CoPermissions
- * @method \App\Model\Entity\CoPermission[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\PermissionsTable $Permissions
+ * @method \App\Model\Entity\Permission[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class CoPermissionsController extends AppController
+class PermissionsController extends AppController
 {
     /**
      * Index method
@@ -18,9 +18,16 @@ class CoPermissionsController extends AppController
      */
     public function index()
     {
-        $coPermissions = $this->paginate($this->CoPermissions);
+        $Permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
 
-        $this->set(compact('coPermissions'));
+        $this->set(compact('Permissions'));
+    }
+
+    public function inactives()
+    {
+        $Permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
+
+        $this->set(compact('Permissions'));
     }
 
     /**
@@ -32,11 +39,11 @@ class CoPermissionsController extends AppController
      */
     public function view($id = null)
     {
-        $coPermission = $this->CoPermissions->get($id, [
-            'contain' => ['CoGroups'],
+        $Permission = $this->Permissions->get($id, [
+            'contain' => ['Roles']
         ]);
 
-        $this->set(compact('coPermission'));
+        $this->set(compact('Permission'));
     }
 
     /**
@@ -46,18 +53,18 @@ class CoPermissionsController extends AppController
      */
     public function add()
     {
-        $coPermission = $this->CoPermissions->newEmptyEntity();
+        $Permission = $this->Permissions->newEmptyEntity();
         if ($this->request->is('post')) {
-            $coPermission = $this->CoPermissions->patchEntity($coPermission, $this->request->getData());
-            if ($this->CoPermissions->save($coPermission)) {
-                $this->Flash->success(__('The co permission has been saved.'));
+            $Permission = $this->Permissions->patchEntity($Permission, $this->request->getData());
+            if ($this->Permissions->save($Permission)) {
+                $this->Flash->success(__('El Permiso ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co permission could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Permiso no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $coGroups = $this->CoPermissions->CoGroups->find('list', ['limit' => 200]);
-        $this->set(compact('coPermission', 'coGroups'));
+        $Roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
+        $this->set(compact('Permission', 'Roles'));
     }
 
     /**
@@ -69,20 +76,20 @@ class CoPermissionsController extends AppController
      */
     public function edit($id = null)
     {
-        $coPermission = $this->CoPermissions->get($id, [
-            'contain' => ['CoGroups'],
+        $Permission = $this->Permissions->get($id, [
+            'contain' => ['Roles'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $coPermission = $this->CoPermissions->patchEntity($coPermission, $this->request->getData());
-            if ($this->CoPermissions->save($coPermission)) {
-                $this->Flash->success(__('The co permission has been saved.'));
+            $Permission = $this->Permissions->patchEntity($Permission, $this->request->getData());
+            if ($this->Permissions->save($Permission)) {
+                $this->Flash->success(__('El Permiso ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co permission could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Permiso no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $coGroups = $this->CoPermissions->CoGroups->find('list', ['limit' => 200]);
-        $this->set(compact('coPermission', 'coGroups'));
+        $Roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
+        $this->set(compact('Permission', 'Roles'));
     }
 
     /**
@@ -94,12 +101,13 @@ class CoPermissionsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $coPermission = $this->CoPermissions->get($id);
-        if ($this->CoPermissions->delete($coPermission)) {
-            $this->Flash->success(__('The co permission has been deleted.'));
+    
+        $Permission = $this->Permissions->get($id);
+        $Permission->deleted = 1;
+        if ($this->Permissions->save($Permission)) {
+            $this->Flash->success(__('El Permiso ha sido eliminado con éxito'));
         } else {
-            $this->Flash->error(__('The co permission could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El Permiso no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

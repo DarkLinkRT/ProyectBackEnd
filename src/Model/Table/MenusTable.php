@@ -9,10 +9,10 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * CoMenus Model
+ * Menus Model
  *
- * @property \App\Model\Table\CoMenusTable&\Cake\ORM\Association\BelongsTo $CoMenus
- * @property \App\Model\Table\CoMenusTable&\Cake\ORM\Association\HasMany $CoMenus
+ * @property \App\Model\Table\MenusTable&\Cake\ORM\Association\BelongsTo $Menus
+ * @property \App\Model\Table\MenusTable&\Cake\ORM\Association\HasMany $Menus
  * @property \App\Model\Table\CoGroupsTable&\Cake\ORM\Association\BelongsToMany $CoGroups
  *
  * @method \App\Model\Entity\CoMenu newEmptyEntity()
@@ -31,7 +31,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class CoMenusTable extends Table
+class MenusTable extends Table
 {
     /**
      * Initialize method
@@ -43,23 +43,23 @@ class CoMenusTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('co_menus');
+        $this->setTable('menus');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        $this->belongsTo('CoMenus', [
-            'foreignKey' => 'co_menu_id',
-            'joinType' => 'INNER',
+        $this->belongsTo('MenuMain', [
+            'className'=>'Menus',
+            'foreignKey' => 'menu_id'
         ]);
-        $this->hasMany('CoMenus', [
-            'foreignKey' => 'co_menu_id',
+        $this->belongsToMany('Roles', [
+            'foreignKey' => 'menu_id',
+            'targetForeignKey' => 'role_id',
+            'joinTable' => 'roles_menus',
         ]);
-        $this->belongsToMany('CoGroups', [
-            'foreignKey' => 'co_menu_id',
-            'targetForeignKey' => 'co_group_id',
-            'joinTable' => 'co_groups_co_menus',
+        $this->hasMany('ChildrenMenus', [
+            'className'=>'Menus',
+            'foreignKey' => 'menu_id'
         ]);
     }
 
@@ -115,7 +115,7 @@ class CoMenusTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['co_menu_id'], 'CoMenus'), ['errorField' => 'co_menu_id']);
+        $rules->add($rules->existsIn(['menu_id'], 'Menus'), ['errorField' => 'menu_id']);
 
         return $rules;
     }

@@ -21,7 +21,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CoMenu[] $co_menus
  * @property \App\Model\Entity\CoPermission[] $co_permissions
  */
-class CoGroup extends Entity
+class Roles extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -41,7 +41,7 @@ class CoGroup extends Entity
         'created' => true,
         'modified' => true,
         'users' => true,
-        'co_menus' => true,
-        'co_permissions' => true,
+        'menus' => true,
+        'permissions' => true,
     ];
 }

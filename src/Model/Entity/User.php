@@ -41,7 +41,7 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        'co_group_id' => true,
+        'role_id' => true,
         'user' => true,
         'password' => true,
         'name' => true,
@@ -50,15 +50,11 @@ class User extends Entity
         'picture' => true,
         'gender_id' => true,
         'domicilio' => true,
-        'cat_locality_id' => true,
-        'last_access' => true,
         'active' => true,
         'deleted' => true,
         'created' => true,
         'modified' => true,
-        'co_group' => true,
-        'gender' => true,
-        'cat_locality' => true,
+        'role' => true
     ];
 
     /**

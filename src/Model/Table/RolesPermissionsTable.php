@@ -28,7 +28,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\CoGroupsCoPermission[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\CoGroupsCoPermission[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class CoGroupsCoPermissionsTable extends Table
+class RolesPermissionsTable extends Table
 {
     /**
      * Initialize method
@@ -40,16 +40,16 @@ class CoGroupsCoPermissionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('co_groups_co_permissions');
+        $this->setTable('roles_permissions');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('CoGroups', [
-            'foreignKey' => 'co_group_id',
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('CoPermissions', [
-            'foreignKey' => 'co_permission_id',
+        $this->belongsTo('Permissions', [
+            'foreignKey' => 'permission_id',
             'joinType' => 'INNER',
         ]);
     }
@@ -78,8 +78,8 @@ class CoGroupsCoPermissionsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['co_group_id'], 'CoGroups'), ['errorField' => 'co_group_id']);
-        $rules->add($rules->existsIn(['co_permission_id'], 'CoPermissions'), ['errorField' => 'co_permission_id']);
+        $rules->add($rules->existsIn(['role_id'], 'Roles'), ['errorField' => 'role_id']);
+        $rules->add($rules->existsIn(['permission_id'], 'Permissions'), ['errorField' => 'permission_id']);
 
         return $rules;
     }

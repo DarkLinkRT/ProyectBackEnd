@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * CoMenus Controller
+ * Menus Controller
  *
- * @property \App\Model\Table\CoMenusTable $CoMenus
- * @method \App\Model\Entity\CoMenu[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\MenusTable $Menus
+ * @method \App\Model\Entity\Menu[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class CoMenusController extends AppController
+class MenusController extends AppController
 {
     /**
      * Index method
@@ -18,9 +18,18 @@ class CoMenusController extends AppController
      */
     public function index()
     {
-        $coMenus = $this->paginate($this->CoMenus);
+        $Menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
 
-        $this->set(compact('coMenus'));
+        $this->set(compact('Menus'));
+    }
+
+    /**
+     * Inactive method
+    */
+    public function inactives(){
+        $Menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
+
+        $this->set(compact('Menus'));
     }
 
     /**
@@ -32,11 +41,11 @@ class CoMenusController extends AppController
      */
     public function view($id = null)
     {
-        $coMenu = $this->CoMenus->get($id, [
-            'contain' => ['CoGroups', 'CoMenus'],
+        $Menu = $this->Menus->get($id, [
+            'contain' => ['Roles', 'Menus'],
         ]);
 
-        $this->set(compact('coMenu'));
+        $this->set(compact('Menu'));
     }
 
     /**
@@ -46,18 +55,19 @@ class CoMenusController extends AppController
      */
     public function add()
     {
-        $coMenu = $this->CoMenus->newEmptyEntity();
+        $Menu = $this->Menus->newEmptyEntity();
         if ($this->request->is('post')) {
-            $coMenu = $this->CoMenus->patchEntity($coMenu, $this->request->getData());
-            if ($this->CoMenus->save($coMenu)) {
-                $this->Flash->success(__('The co menu has been saved.'));
+            $Menu = $this->Menus->patchEntity($Menu, $this->request->getData());
+            if ($this->Menus->save($Menu)) {
+                $this->Flash->success(__('El Menú ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co menu could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Menú no pudo ser guardado. Porfavor, intente de nuevo.'));
         }
-        $coGroups = $this->CoMenus->CoGroups->find('list', ['limit' => 200]);
-        $this->set(compact('coMenu', 'coGroups'));
+        $Roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
+        $Menus = $this->Menus->find('all',['conditions'=>['active'=>1,'co_menu_id is null','deleted'=>0]]);
+        $this->set(compact('Menu', 'Roles','Menus'));
     }
 
     /**
@@ -69,20 +79,21 @@ class CoMenusController extends AppController
      */
     public function edit($id = null)
     {
-        $coMenu = $this->CoMenus->get($id, [
-            'contain' => ['CoGroups'],
+        $Menu = $this->Menus->get($id, [
+            'contain' => ['Roles'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $coMenu = $this->CoMenus->patchEntity($coMenu, $this->request->getData());
-            if ($this->CoMenus->save($coMenu)) {
-                $this->Flash->success(__('The co menu has been saved.'));
+            $Menu = $this->Menus->patchEntity($Menu, $this->request->getData());
+            if ($this->Menus->save($Menu)) {
+                $this->Flash->success(__('El Menú ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co menu could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Menú no pudo ser guardado. Porfavor, intente de nuevo.'));
         }
-        $coGroups = $this->CoMenus->CoGroups->find('list', ['limit' => 200]);
-        $this->set(compact('coMenu', 'coGroups'));
+        $Roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
+        $Menus = $this->Menus->find('all',['conditions'=>['active'=>1,'co_menu_id is null','deleted'=>0]]);
+        $this->set(compact('Menu', 'Roles','Menus'));
     }
 
     /**
@@ -94,12 +105,12 @@ class CoMenusController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $coMenu = $this->CoMenus->get($id);
-        if ($this->CoMenus->delete($coMenu)) {
-            $this->Flash->success(__('The co menu has been deleted.'));
+        $Menu = $this->Menus->get($id);
+        $Menu->deleted = 1;
+        if ($this->Menus->save($Menu)) {
+            $this->Flash->success(__('El Menú ha sido eliminado con éxito.'));
         } else {
-            $this->Flash->error(__('The co menu could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El Menú no se pudo eliminar. Porfavor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

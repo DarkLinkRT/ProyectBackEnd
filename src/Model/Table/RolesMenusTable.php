@@ -28,7 +28,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\CoGroupsCoMenu[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\CoGroupsCoMenu[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class CoGroupsCoMenusTable extends Table
+class RolesMenusTable extends Table
 {
     /**
      * Initialize method
@@ -40,16 +40,16 @@ class CoGroupsCoMenusTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('co_groups_co_menus');
+        $this->setTable('roles_menus');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('CoGroups', [
-            'foreignKey' => 'co_group_id',
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('CoMenus', [
-            'foreignKey' => 'co_menu_id',
+        $this->belongsTo('Menus', [
+            'foreignKey' => 'menu_id',
             'joinType' => 'INNER',
         ]);
     }
@@ -78,8 +78,8 @@ class CoGroupsCoMenusTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['co_group_id'], 'CoGroups'), ['errorField' => 'co_group_id']);
-        $rules->add($rules->existsIn(['co_menu_id'], 'CoMenus'), ['errorField' => 'co_menu_id']);
+        $rules->add($rules->existsIn(['role_id'], 'Roles'), ['errorField' => 'role_id']);
+        $rules->add($rules->existsIn(['menu_id'], 'Menus'), ['errorField' => 'menu_id']);
 
         return $rules;
     }

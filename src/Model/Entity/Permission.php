@@ -20,7 +20,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\CoGroup[] $co_groups
  */
-class CoPermission extends Entity
+class Permission extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -40,6 +40,6 @@ class CoPermission extends Entity
         'deleted' => true,
         'created' => true,
         'modified' => true,
-        'co_groups' => true,
+        'roles' => true,
     ];
 }

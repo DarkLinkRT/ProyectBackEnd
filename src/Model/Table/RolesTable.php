@@ -31,7 +31,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class CoGroupsTable extends Table
+class RolesTable extends Table
 {
     /**
      * Initialize method
@@ -43,24 +43,24 @@ class CoGroupsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('co_groups');
+        $this->setTable('roles');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Users', [
-            'foreignKey' => 'co_group_id',
+            'foreignKey' => 'role_id',
         ]);
-        $this->belongsToMany('CoMenus', [
-            'foreignKey' => 'co_group_id',
-            'targetForeignKey' => 'co_menu_id',
-            'joinTable' => 'co_groups_co_menus',
+        $this->belongsToMany('Menus', [
+            'foreignKey' => 'role_id',
+            'targetForeignKey' => 'menu_id',
+            'joinTable' => 'roles_menus',
         ]);
-        $this->belongsToMany('CoPermissions', [
-            'foreignKey' => 'co_group_id',
-            'targetForeignKey' => 'co_permission_id',
-            'joinTable' => 'co_groups_co_permissions',
+        $this->belongsToMany('Permissions', [
+            'foreignKey' => 'role_id',
+            'targetForeignKey' => 'permission_id',
+            'joinTable' => 'roles_permissions',
         ]);
     }
 

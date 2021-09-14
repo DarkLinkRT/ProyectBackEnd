@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * CoGroups Controller
+ * Roles Controller
  *
- * @property \App\Model\Table\CoGroupsTable $CoGroups
+ * @property \App\Model\Table\RolesTable $Roles
  * @method \App\Model\Entity\CoGroup[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class CoGroupsController extends AppController
+class RolesController extends AppController
 {
     /**
      * Index method
@@ -18,9 +18,15 @@ class CoGroupsController extends AppController
      */
     public function index()
     {
-        $coGroups = $this->paginate($this->CoGroups);
+        $Roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]));
 
-        $this->set(compact('coGroups'));
+        $this->set(compact('Roles'));
+    }
+
+    public function inactives(){
+        $Roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>0,'deleted'=>0],'order' => ['name'=>'ASC']]));
+
+        $this->set(compact('Roles'));
     }
 
     /**
@@ -32,8 +38,8 @@ class CoGroupsController extends AppController
      */
     public function view($id = null)
     {
-        $coGroup = $this->CoGroups->get($id, [
-            'contain' => ['CoMenus', 'CoPermissions', 'Users'],
+        $coGroup = $this->Roles->get($id, [
+            'contain' => ['Menus', 'Permissions', 'Users'],
         ]);
 
         $this->set(compact('coGroup'));
@@ -46,19 +52,19 @@ class CoGroupsController extends AppController
      */
     public function add()
     {
-        $coGroup = $this->CoGroups->newEmptyEntity();
+        $coGroup = $this->Roles->newEmptyEntity();
         if ($this->request->is('post')) {
-            $coGroup = $this->CoGroups->patchEntity($coGroup, $this->request->getData());
-            if ($this->CoGroups->save($coGroup)) {
-                $this->Flash->success(__('The co group has been saved.'));
+            $coGroup = $this->Roles->patchEntity($coGroup, $this->request->getData());
+            if ($this->Roles->save($coGroup)) {
+                $this->Flash->success(__('El Rol ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co group could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Rol no pudo ser guardado. Por favor, intente de nuevo'));
         }
-        $coMenus = $this->CoGroups->CoMenus->find('list', ['limit' => 200]);
-        $coPermissions = $this->CoGroups->CoPermissions->find('list', ['limit' => 200]);
-        $this->set(compact('coGroup', 'coMenus', 'coPermissions'));
+        $Menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $Permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $this->set(compact('coGroup', 'Menus', 'Permissions'));
     }
 
     /**
@@ -70,21 +76,21 @@ class CoGroupsController extends AppController
      */
     public function edit($id = null)
     {
-        $coGroup = $this->CoGroups->get($id, [
-            'contain' => ['CoMenus', 'CoPermissions'],
+        $coGroup = $this->Roles->get($id, [
+            'contain' => ['Menus', 'Permissions'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $coGroup = $this->CoGroups->patchEntity($coGroup, $this->request->getData());
-            if ($this->CoGroups->save($coGroup)) {
-                $this->Flash->success(__('The co group has been saved.'));
+            $coGroup = $this->Roles->patchEntity($coGroup, $this->request->getData());
+            if ($this->Roles->save($coGroup)) {
+                $this->Flash->success(__('El Rol ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The co group could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Rol no pudo ser guardado. Por favor, intente de nuevo'));
         }
-        $coMenus = $this->CoGroups->CoMenus->find('list', ['limit' => 200]);
-        $coPermissions = $this->CoGroups->CoPermissions->find('list', ['limit' => 200]);
-        $this->set(compact('coGroup', 'coMenus', 'coPermissions'));
+        $Menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0] ,'order' => ['name'=>'ASC']]);
+        $Permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $this->set(compact('coGroup', 'Menus', 'Permissions'));
     }
 
     /**
@@ -97,11 +103,12 @@ class CoGroupsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $coGroup = $this->CoGroups->get($id);
-        if ($this->CoGroups->delete($coGroup)) {
-            $this->Flash->success(__('The co group has been deleted.'));
+        $coGroup = $this->Roles->get($id);
+        $coGroup->deleted = 1;
+        if ($this->Roles->save($coGroup)) {
+            $this->Flash->success(__('El Rol ha sido eliminado con éxito.'));
         } else {
-            $this->Flash->error(__('The co group could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El Rol no se pudo eliminar. Por favor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

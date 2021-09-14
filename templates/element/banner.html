@@ -1,0 +1,110 @@
+<style>
+	.tooltip {
+    display:inline-block;
+    
+    border-bottom:1px dotted #666;
+    text-align:left;
+}
+
+.tooltip h3 {margin:12px 0;color: white; font-weight: 10px}
+
+.tooltip .top {
+    min-width:500px;
+    max-width:400px;
+    top:-20px;
+    left:50%;
+    transform:translate(-30%,-100%);
+    padding:10px 20px;
+    color:#ffffff;
+    background-color:#009cdc;
+    font-weight:normal;
+    font-size:14px;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
+.tooltip:hover .top {
+    display:block;
+}
+
+.tooltip .top i {
+    position:absolute;
+    top:100%;
+    left:30%;
+    margin-left:-15px;
+    width:30px;
+    height:15px;
+    overflow:hidden;
+}
+
+.tooltip .top i::after {
+    content:'';
+    position:absolute;
+    width:15px;
+    height:15px;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background-color:#009cdc;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
+
+</style>
+
+ <div id="divQuien" style="position: fixed;display:none;" class="tooltip">
+	    <div class="top">
+	        <h3>A la población de escasos recrusos que bajo su techo tienen piso de tierra y especialmente para quienes viven en Zonas de Atención Prioritaria</h3>
+	    </div>
+  </div>
+
+   <div id="divBeneficios" style="position: fixed;display:none;" class="tooltip">
+	    <div class="top">
+	        <h3>A la población de escasos recrusos que bajo su techo tienen piso de tierra y especialmente para quienes viven en Zonas de Atención Prioritaria</h3>
+	    </div>
+  </div>
+
+   <div id="divRequisitos" style="position: fixed;display:none;" class="tooltip">
+	    <div class="top">
+	        <h3>A la población de escasos recrusos que bajo su techo tienen piso de tierra y especialmente para quienes viven en Zonas de Atención Prioritaria</h3>
+	    </div>
+  </div>
+
+  <div id="divEtapa" style="position: fixed;display:none;" class="tooltip">
+    <div class="top">
+        <h3>A la población de escasos recrusos que bajo su techo tienen piso de tierra y especialmente para quienes viven en Zonas de Atención Prioritaria</h3>
+    </div>
+</div>
+
+<center>
+<img src="https://qroo.gob.mx/sedeso2/wp-content/sedeso2/uploads/2021/05/piso-firme-09.jpg" alt="" usemap="#map1620153961637">
+</center>
+
+<map id="map1620153961637" name="map1620153961637">
+	<area shape="rect" onmouseover="showdiv(event,'divQuien')" onmouseout="hideDiv(event,'divQuien')" coords="62.03125,193.0234375,284.03125,399.0234375" title="" alt="" href="#quien" target="_self">
+	<area shape="rect" onmouseover="showdiv(event,'divBeneficios')" onmouseout="hideDiv(event,'divBeneficios')" coords="358,199.0234375,564,396.0234375" title="" alt="" href="#beneficio" target="_self">
+	<area shape="rect" onmouseover="showdiv(event,'divRequisitos')" onmouseout="hideDiv(event,'divRequisitos')" coords="641.03125,197.03125,856.03125,395.03125" title="" alt="" href="#requisito" target="_self">
+    <area shape="rect"  onmouseover="showdiv(event,'divEtapa')" onmouseout="hideDiv(event,'divEtapa')" coords="929.03125,204.015625,1127.03125,387.015625" title="" alt="" href="#etapa" target="_self">
+</map>
+<script type="text/javascript">
+	function showdiv(e,divid){
+
+		var div = document.getElementById(divid);
+		div.style.display = "block";
+
+	    var left  = e.clientX  + "px";
+	    var top  = e.clientY  + "px";
+
+	    div.style.left = left;
+	    div.style.top = top;
+
+	    return false;
+	}
+
+	function hideDiv(e,divid){
+		var div = document.getElementById(divid);
+		div.style.display = "none";
+	}
+</script>

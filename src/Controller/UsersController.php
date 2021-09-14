@@ -16,10 +16,29 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
+
+    public function initialize() :void {
+        parent::initialize();
+    }
+
     public function index()
     {
         $this->paginate = [
-            'contain' => ['CoGroups', 'Genders', 'CatLocalities'],
+            'conditions' => ['Users.active' => 1,'Users.deleted' => 0 ],
+            'contain' => ['Roles'],
+            'order' => ['Users.name' => 'DESC']
+        ];
+        $users = $this->paginate($this->Users);
+
+        $this->set(compact('users'));
+    }
+
+    public function inactives()
+    {
+        $this->paginate = [
+            'conditions' => ['Users.active'=>0,'Users.deleted' =>0 ],
+            'contain' => ['Roles'],
+            'order' => ['Users.name' => 'ASC']
         ];
         $users = $this->paginate($this->Users);
 
@@ -35,11 +54,15 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['CoGroups', 'Genders', 'CatLocalities'],
-        ]);
 
-        $this->set(compact('user'));
+        $this->paginate = [
+            'conditions' => ['Users.active' => 1,'Users.deleted' => 0 ],
+            'contain' => ['Roles'],
+            'order' => ['Users.name' => 'DESC']
+        ];
+        $users = $this->paginate($this->Users);
+
+        $this->set(compact('users'));
     }
 
     /**
@@ -53,16 +76,14 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('El Usuario ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Usuario no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $coGroups = $this->Users->CoGroups->find('list', ['limit' => 200]);
-        $genders = $this->Users->Genders->find('list', ['limit' => 200]);
-        $catLocalities = $this->Users->CatLocalities->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'coGroups', 'genders', 'catLocalities'));
+        $Roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
+        $this->set(compact('user', 'Roles'));
     }
 
     /**
@@ -75,21 +96,19 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => [],
+            'contain' => [] 
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('El Usuario ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Usuario no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $coGroups = $this->Users->CoGroups->find('list', ['limit' => 200]);
-        $genders = $this->Users->Genders->find('list', ['limit' => 200]);
-        $catLocalities = $this->Users->CatLocalities->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'coGroups', 'genders', 'catLocalities'));
+        $Roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
+        $this->set(compact('user', 'Roles'));
     }
 
     /**
@@ -101,14 +120,39 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+        $user->deleted = 1;
+        if ($this->Users->save($user)) {
+            $this->Flash->success(__('El Usuario ha sido eliminado con éxito.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El Usuario no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login()
+    {
+        $this->viewBuilder()->setLayout('login');
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $user['role'] = $this->Users->Roles->get($user['role_id']);
+                $this->Auth->setUser($user);    
+                //Redireccioar a la pagina de logueo
+                // return $this->redirect(
+                //     ['controller' => $user['co_grupo']['pagina_inicial'] , 'action' => 'index']
+                // );
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Nombre de usuario o contraseña incorrectas.');
+        }
+    }
+    
+    public function logout()
+    {
+        $this->request->getSession()->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
+
 }

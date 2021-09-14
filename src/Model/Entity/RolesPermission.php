@@ -15,7 +15,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CoGroup $co_group
  * @property \App\Model\Entity\CoPermission $co_permission
  */
-class CoGroupsCoPermission extends Entity
+class RolesPermission extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -27,9 +27,9 @@ class CoGroupsCoPermission extends Entity
      * @var array
      */
     protected $_accessible = [
-        'co_group_id' => true,
-        'co_permission_id' => true,
-        'co_group' => true,
-        'co_permission' => true,
+        'role_id' => true,
+        'permission_id' => true,
+        'role' => true,
+        'permission' => true,
     ];
 }
