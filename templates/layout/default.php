@@ -62,6 +62,12 @@
 
     <?= $this->Html->script('jquery-3.6.0.js') ?>
 
+    <style>
+        .card {
+            margin: 0 !important;
+        }
+    </style>
+
 </head>
 <!-- END: Head-->
 
@@ -106,8 +112,10 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-             <?= $this->Flash->render() ?>
-             <?= $this->fetch('content') ?>
+            <div class="content-body">
+                <?= $this->Flash->render() ?>
+                <?= $this->fetch('content') ?>
+            </div>
         </div>
     </div>
     <!-- END: Content-->
@@ -117,7 +125,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="text-bold-800 grey darken-2" href="#">Consultoría Integral SM2,</a> Todos los derechos reservados</span><span class="float-md-right d-none d-md-block"<i class="feather icon-heart pink"></i></span>
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="text-bold-800 grey darken-2" href="#">Consultoría Integral SM2,</a> Todos los derechos reservados</span><span class="float-md-right d-none d-md-block"><i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
     </footer>

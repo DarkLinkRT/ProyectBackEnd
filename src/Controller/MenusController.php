@@ -18,18 +18,18 @@ class MenusController extends AppController
      */
     public function index()
     {
-        $Menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
+        $menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
 
-        $this->set(compact('Menus'));
+        $this->set(compact('menus'));
     }
 
     /**
      * Inactive method
     */
     public function inactives(){
-        $Menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
+        $menus = $this->paginate($this->Menus->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
 
-        $this->set(compact('Menus'));
+        $this->set(compact('menus'));
     }
 
     /**
@@ -41,11 +41,11 @@ class MenusController extends AppController
      */
     public function view($id = null)
     {
-        $Menu = $this->Menus->get($id, [
+        $menu = $this->Menus->get($id, [
             'contain' => ['Roles', 'Menus'],
         ]);
 
-        $this->set(compact('Menu'));
+        $this->set(compact('menu'));
     }
 
     /**
@@ -55,19 +55,19 @@ class MenusController extends AppController
      */
     public function add()
     {
-        $Menu = $this->Menus->newEmptyEntity();
+        $menu = $this->Menus->newEmptyEntity();
         if ($this->request->is('post')) {
-            $Menu = $this->Menus->patchEntity($Menu, $this->request->getData());
-            if ($this->Menus->save($Menu)) {
+            $menu = $this->Menus->patchEntity($menu, $this->request->getData());
+            if ($this->Menus->save($menu)) {
                 $this->Flash->success(__('El Menú ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Menú no pudo ser guardado. Porfavor, intente de nuevo.'));
         }
-        $Roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
-        $Menus = $this->Menus->find('all',['conditions'=>['active'=>1,'co_menu_id is null','deleted'=>0]]);
-        $this->set(compact('Menu', 'Roles','Menus'));
+        $roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
+        $menus = $this->Menus->find('all',['conditions'=>['active'=>1,'menu_id is null','deleted'=>0]]);
+        $this->set(compact('menu', 'roles','menus'));
     }
 
     /**
@@ -79,21 +79,21 @@ class MenusController extends AppController
      */
     public function edit($id = null)
     {
-        $Menu = $this->Menus->get($id, [
+        $menu = $this->Menus->get($id, [
             'contain' => ['Roles'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $Menu = $this->Menus->patchEntity($Menu, $this->request->getData());
-            if ($this->Menus->save($Menu)) {
+            $menu = $this->Menus->patchEntity($menu, $this->request->getData());
+            if ($this->Menus->save($menu)) {
                 $this->Flash->success(__('El Menú ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Menú no pudo ser guardado. Porfavor, intente de nuevo.'));
         }
-        $Roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
-        $Menus = $this->Menus->find('all',['conditions'=>['active'=>1,'co_menu_id is null','deleted'=>0]]);
-        $this->set(compact('Menu', 'Roles','Menus'));
+        $roles = $this->Menus->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0]]);
+        $menus = $this->Menus->find('all',['conditions'=>['active'=>1,'menu_id is null','deleted'=>0]]);
+        $this->set(compact('menu', 'roles','menus'));
     }
 
     /**

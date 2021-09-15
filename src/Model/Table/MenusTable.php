@@ -115,7 +115,7 @@ class MenusTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['menu_id'], 'Menus'), ['errorField' => 'menu_id']);
+        //$rules->add($rules->existsIn(['menu_id'], 'Menus'), ['errorField' => 'menu_id']);
 
         return $rules;
     }

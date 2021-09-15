@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CoGroup $coGroup
+ * @var \App\Model\Entity\role $role
  */
 ?>
 
@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <p class="card-text">Registrar un nuevo rol para mostrarse en el sistema.</p>
                         <!-- -->
-                        <?= $this->Form->create($coGroup,['class'=>'form form-vertical']) ?>
+                        <?= $this->Form->create($role,['class'=>'form form-vertical']) ?>
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">
@@ -70,8 +70,8 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Menús</label>
-                                            <select class="select2-icons form-control" name="co_menus[_ids][]" multiple="multiple">
-                                                <?php foreach($coMenus as $menu){ ?>
+                                            <select class="select2-icons form-control" name="menus[_ids][]" multiple="multiple">
+                                                <?php foreach($menus as $menu){ ?>
                                                     <option  data-icon="feather <?= $menu->icon ?>" value="<?= $menu->id ?>"><?= $menu->name ?></option>
                                                 <?php } ?>
                                             </select>
@@ -80,8 +80,8 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Permisos</label>
-                                            <select class="select2 form-control" name="co_permissions[_ids][]" multiple="multiple">
-                                                <?php foreach($coPermissions as $permission){ ?>
+                                            <select class="select2 form-control" name="permissions[_ids][]" multiple="multiple">
+                                                <?php foreach($permissions as $permission){ ?>
                                                     <option value="<?= $permission->id ?>"><?= $permission->name ?></option>
                                                 <?php } ?>
                                             </select>
@@ -150,8 +150,8 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="coGroups form content">
-            <?= $this->Form->create($coGroup) ?>
+        <div class="roles form content">
+            <?= $this->Form->create($role) ?>
             <fieldset>
                 <legend><?= __('Add Co Group') ?></legend>
                 <?php
@@ -160,7 +160,7 @@
                     echo $this->Form->control('page');
                     echo $this->Form->control('active');
                     echo $this->Form->control('deleted');
-                    echo $this->Form->control('co_menus._ids', ['options' => $coMenus]);
+                    echo $this->Form->control('co_menus._ids', ['options' => $menus]);
                     echo $this->Form->control('co_permissions._ids', ['options' => $coPermissions]);
                 ?>
             </fieldset>

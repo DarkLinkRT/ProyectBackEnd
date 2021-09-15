@@ -40,15 +40,15 @@
                     <div class="card-body">
                         <p class="card-text">Registrar un nuevo menú para mostrarse en el sistema.</p>
                         <!-- -->
-                        <?= $this->Form->create($coMenu,['class'=>'form form-vertical']) ?>
+                        <?= $this->Form->create($menu,['class'=>'form form-vertical']) ?>
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Menú Principal</label>
-                                            <select class="select2-icons form-control" name="co_menu_id" id="select2-icons">
+                                            <select class="select2-icons form-control" name="menu_id" id="select2-icons">
                                                 <option value="">Ninguno</option>
-                                                <?php foreach($coMenus as $menu){ ?>
+                                                <?php foreach($menus as $_menu){ ?>
                                                     <option value="<?= $menu->id ?>" data-icon="feather <?= $menu->icon ?>"><?= $menu->name ?></option>
                                                 <?php } ?>
                                             </select>
@@ -81,9 +81,9 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Roles</label>
-                                            <select class="select2 form-control" name="co_groups[_ids][]" multiple="multiple">
-                                                <?php foreach($coGroups as $group){ ?>
-                                                    <option value="<?= $group->id ?>"><?= $group->name ?></option>
+                                            <select class="select2 form-control" name="roles[_ids][]" multiple="multiple">
+                                                <?php foreach($roles as $role){ ?>
+                                                    <option value="<?= $role->id ?>"><?= $role->name ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

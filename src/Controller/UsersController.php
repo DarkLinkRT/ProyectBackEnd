@@ -155,4 +155,17 @@ class UsersController extends AppController
         return $this->redirect($this->Auth->logout());
     }
 
+    public function settheme()
+    {
+        $id = $this->request->getSession()->read('Auth.User.id');
+        $user = $this->Users->get($id);
+        $user->theme = $this->request->getQuery("theme");
+        $this->request->getSession()->write('Auth.User.theme',$this->request->getQuery("theme"));
+        if($this->Users->save($user)){
+            return $this->response->withType("application/json")->withStringBody(json_encode(1));
+        } else{
+            return $this->response->withType("application/json")->withStringBody(json_encode(0));
+        }
+    }
+
 }

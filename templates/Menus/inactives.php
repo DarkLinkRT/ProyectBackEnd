@@ -50,26 +50,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($coMenus as $coMenu): ?>
+                                    <?php foreach ($menus as $menu): ?>
                                         <tr>
                                             <td>
-                                                <i class="feather <?= $coMenu->icon ?>  "></i>
+                                                <i class="feather <?= $menu->icon ?>  "></i>
                                             </td>
-                                            <td><?= $coMenu->name ?></td>
+                                            <td><?= $menu->name ?></td>
                                             <td>
-                                                <?= $coMenu->active == 1 ? '<i class="fa fa-circle font-small-3 text-success mr-50"></i> Activo' : '<i class="fa fa-circle font-small-3 text-danger mr-50"></i> Inactivo' ?>
+                                                <?= $menu->active == 1 ? '<i class="fa fa-circle font-small-3 text-success mr-50"></i> Activo' : '<i class="fa fa-circle font-small-3 text-danger mr-50"></i> Inactivo' ?>
                                             </td>
                                             <td>
-                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-edit"></i></span>', ['action' => 'edit', $coMenu->id],['escape'=>false]) ?>
-                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-trash"></i></span>', [ $coMenu->id],['escape'=>false,  'data-toggle'=>'modal', 'data-target' =>'#deletedata' . $coMenu->id]) ?>
+                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-edit"></i></span>', ['action' => 'edit', $menu->id],['escape'=>false]) ?>
+                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-trash"></i></span>', [ $menu->id],['escape'=>false,  'data-toggle'=>'modal', 'data-target' =>'#deletedata' . $menu->id]) ?>
                                             </td>
                                         </tr>
                                         <!-- Modal -->
-                                        <div class="modal text-left" id="deletedata<?= $coMenu->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
+                                        <div class="modal text-left" id="deletedata<?= $menu->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $coMenu->name ?></h4>
+                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $menu->name ?></h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -84,7 +84,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                                                                    <?= $this->Html->link('<button type="button" class="btn btn-primary">Aceptar</button>', ['action' => 'delete', $coMenu->id],['escape' => false]) ?>
+                                                                    <?= $this->Html->link('<button type="button" class="btn btn-primary">Aceptar</button>', ['action' => 'delete', $menu->id],['escape' => false]) ?>
                                                                 </div>
                                                             </div>
                                                         </div>

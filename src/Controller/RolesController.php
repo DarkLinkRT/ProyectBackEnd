@@ -18,15 +18,15 @@ class RolesController extends AppController
      */
     public function index()
     {
-        $Roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]));
+        $roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]));
 
-        $this->set(compact('Roles'));
+        $this->set(compact('roles'));
     }
 
     public function inactives(){
-        $Roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>0,'deleted'=>0],'order' => ['name'=>'ASC']]));
+        $roles = $this->paginate($this->Roles->find('all',['conditions'=>['active'=>0,'deleted'=>0],'order' => ['name'=>'ASC']]));
 
-        $this->set(compact('Roles'));
+        $this->set(compact('roles'));
     }
 
     /**
@@ -38,11 +38,11 @@ class RolesController extends AppController
      */
     public function view($id = null)
     {
-        $coGroup = $this->Roles->get($id, [
+        $roles = $this->Roles->get($id, [
             'contain' => ['Menus', 'Permissions', 'Users'],
         ]);
 
-        $this->set(compact('coGroup'));
+        $this->set(compact('roles'));
     }
 
     /**
@@ -52,19 +52,19 @@ class RolesController extends AppController
      */
     public function add()
     {
-        $coGroup = $this->Roles->newEmptyEntity();
+        $role = $this->Roles->newEmptyEntity();
         if ($this->request->is('post')) {
-            $coGroup = $this->Roles->patchEntity($coGroup, $this->request->getData());
-            if ($this->Roles->save($coGroup)) {
+            $role = $this->Roles->patchEntity($role, $this->request->getData());
+            if ($this->Roles->save($role)) {
                 $this->Flash->success(__('El Rol ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Rol no pudo ser guardado. Por favor, intente de nuevo'));
         }
-        $Menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
-        $Permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
-        $this->set(compact('coGroup', 'Menus', 'Permissions'));
+        $menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $this->set(compact('role', 'menus', 'permissions'));
     }
 
     /**
@@ -76,21 +76,21 @@ class RolesController extends AppController
      */
     public function edit($id = null)
     {
-        $coGroup = $this->Roles->get($id, [
+        $role = $this->Roles->get($id, [
             'contain' => ['Menus', 'Permissions'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $coGroup = $this->Roles->patchEntity($coGroup, $this->request->getData());
-            if ($this->Roles->save($coGroup)) {
+            $role = $this->Roles->patchEntity($role, $this->request->getData());
+            if ($this->Roles->save($role)) {
                 $this->Flash->success(__('El Rol ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Rol no pudo ser guardado. Por favor, intente de nuevo'));
         }
-        $Menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0] ,'order' => ['name'=>'ASC']]);
-        $Permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
-        $this->set(compact('coGroup', 'Menus', 'Permissions'));
+        $menus = $this->Roles->Menus->find('all', ['conditions'=>['active'=>1,'deleted'=>0] ,'order' => ['name'=>'ASC']]);
+        $permissions = $this->Roles->Permissions->find('all', ['conditions'=>['active'=>1,'deleted'=>0],'order' => ['name'=>'ASC']]);
+        $this->set(compact('role', 'menus', 'permissions'));
     }
 
     /**

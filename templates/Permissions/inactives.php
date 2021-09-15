@@ -1,13 +1,6 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CoGroup[]|\Cake\Collection\CollectionInterface $roles
- */
-?>
-
-<?php
-/**
- * @var \App\View\AppView $this
  * @var \App\Model\Entity\CoMenu[]|\Cake\Collection\CollectionInterface $coMenus
  */
 ?>
@@ -16,13 +9,13 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-left mb-0">Roles</h2>
+                <h2 class="content-header-title float-left mb-0">Permisos Inactivos</h2>
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <?= $this->Html->link('Inicio',$IndexPage,['escape'=>false]) ?>
                         </li>
-                        <li class="breadcrumb-item active">Roles
+                        <li class="breadcrumb-item active">Permisos Inactivos
                         </li>
                     </ol>
                 </div>
@@ -36,16 +29,15 @@
     <div class="row" id="basic-table">
         <div class="col-12">
             <div class="row col-12">
-                <?= $this->Html->link('<button type="button" class="btn btn-flat-primary border-primary text-primary mr-1 mb-1 waves-effect waves-light"><span><i class="feather icon-plus"></i> Nuevo </span></button>', ['action' => 'add'], ['escape'=> false]) ?>
-                <?= $this->Html->link('<button type="button" class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">Ver Inactivos</button>', ['action' => 'inactives'], ['escape'=> false]) ?>
+                <?= $this->Html->link('<button type="button" class="btn btn-outline-success mr-1 mb-1 waves-effect waves-light">Ver Activos</button>', ['action' => 'index'], ['escape'=> false]) ?>
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Registros</h4>
+                    <h4 class="card-title">Registros Inactivos</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <p class="card-text">Administra los roles que aparecerán en el sistema.</p>
+                        <p class="card-text">Administra los permisos que se encuentran no activos en el sistema.</p>
                         <!-- Table with outer spacing -->
                         <div class="table-responsive">
                             <table class="table table-hover-animation">
@@ -58,26 +50,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($roles as $role): ?>
+                                <?php foreach ($permissions as $permission): ?>
                                         <tr>
-                                            <td> <i class="feather <?= $role->icon ?> text-<?= $role->color_icon ?>"></i> <?= $role->name ?></td>
+                                            <td><?= $permission->name ?></td>
                                             <td>
-                                                <?= $role->active == 1 ? '<i class="fa fa-circle font-small-3 text-success mr-50"></i> Activo' : '<i class="fa fa-circle font-small-3 text-danger mr-50"></i> Inactivo' ?>
+                                                <?= $permission->active == 1 ? '<i class="fa fa-circle font-small-3 text-success mr-50"></i> Activo' : '<i class="fa fa-circle font-small-3 text-danger mr-50"></i> Inactivo' ?>
                                             </td>
                                             <td>
-                                                <?= $role->created ?>
+                                                <?= $permission->created ?>
                                             </td>
                                             <td>
-                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-edit"></i></span>', ['action' => 'edit', $role->id],['escape'=>false]) ?>
-                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-trash"></i></span>', [ $role->id],['escape'=>false,  'data-toggle'=>'modal', 'data-target' =>'#deletedata' . $role->id]) ?>
+                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-edit"></i></span>', ['action' => 'edit', $permission->id],['escape'=>false]) ?>
+                                                <?= $this->Html->link('<span class="action-edit"><i class="feather icon-trash"></i></span>', [ $permission->id],['escape'=>false,  'data-toggle'=>'modal', 'data-target' =>'#deletedata']) ?>
                                             </td>
                                         </tr>
-                                        <!-- Modal -->
-                                        <div class="modal text-left" id="deletedata<?=  $role->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
+                                         <!-- Modal -->
+                                         <div class="modal text-left" id="deletedata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $role->name ?></h4>
+                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $permission->name ?></h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -92,7 +84,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                                                                    <?= $this->Html->link('<button type="button" class="btn btn-primary">Aceptar</button>', ['action' => 'delete', $role->id],['escape' => false]) ?>
+                                                                    <?= $this->Form->postLink('<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>', ['action' => 'delete', $permission->id],['escape' => false]) ?>
                                                                 </div>
                                                             </div>
                                                         </div>

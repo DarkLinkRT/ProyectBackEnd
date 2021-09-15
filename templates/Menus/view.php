@@ -8,60 +8,60 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Co Menu'), ['action' => 'edit', $coMenu->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Co Menu'), ['action' => 'delete', $coMenu->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coMenu->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Co Menu'), ['action' => 'edit', $menu->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Co Menu'), ['action' => 'delete', $menu->id], ['confirm' => __('Are you sure you want to delete # {0}?', $menu->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Co Menus'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Co Menu'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="coMenus view content">
-            <h3><?= h($coMenu->name) ?></h3>
+            <h3><?= h($menu->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= h($coMenu->id) ?></td>
+                    <td><?= h($menu->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Co Menu Id') ?></th>
-                    <td><?= h($coMenu->co_menu_id) ?></td>
+                    <td><?= h($menu->co_menu_id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Icon') ?></th>
-                    <td><?= h($coMenu->icon) ?></td>
+                    <td><?= h($menu->icon) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Name') ?></th>
-                    <td><?= h($coMenu->name) ?></td>
+                    <td><?= h($menu->name) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Href') ?></th>
-                    <td><?= h($coMenu->href) ?></td>
+                    <td><?= h($menu->href) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Position') ?></th>
-                    <td><?= $this->Number->format($coMenu->position) ?></td>
+                    <td><?= $this->Number->format($menu->position) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
-                    <td><?= h($coMenu->created) ?></td>
+                    <td><?= h($menu->created) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Modified') ?></th>
-                    <td><?= h($coMenu->modified) ?></td>
+                    <td><?= h($menu->modified) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Active') ?></th>
-                    <td><?= $coMenu->active ? __('Yes') : __('No'); ?></td>
+                    <td><?= $menu->active ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Deleted') ?></th>
-                    <td><?= $coMenu->deleted ? __('Yes') : __('No'); ?></td>
+                    <td><?= $menu->deleted ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Co Groups') ?></h4>
-                <?php if (!empty($coMenu->co_groups)) : ?>
+                <?php if (!empty($menu->roles)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -75,16 +75,16 @@
                             <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($coMenu->co_groups as $coGroups) : ?>
+                        <?php foreach ($menu->roles as $roles) : ?>
                         <tr>
-                            <td><?= h($coGroups->id) ?></td>
-                            <td><?= h($coGroups->name) ?></td>
-                            <td><?= h($coGroups->description) ?></td>
-                            <td><?= h($coGroups->page) ?></td>
-                            <td><?= h($coGroups->active) ?></td>
-                            <td><?= h($coGroups->deleted) ?></td>
-                            <td><?= h($coGroups->created) ?></td>
-                            <td><?= h($coGroups->modified) ?></td>
+                            <td><?= h($roles->id) ?></td>
+                            <td><?= h($roles->name) ?></td>
+                            <td><?= h($roles->description) ?></td>
+                            <td><?= h($roles->page) ?></td>
+                            <td><?= h($roles->active) ?></td>
+                            <td><?= h($roles->deleted) ?></td>
+                            <td><?= h($roles->created) ?></td>
+                            <td><?= h($roles->modified) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'CoGroups', 'action' => 'view', $coGroups->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'CoGroups', 'action' => 'edit', $coGroups->id]) ?>

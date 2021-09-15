@@ -18,16 +18,16 @@ class PermissionsController extends AppController
      */
     public function index()
     {
-        $Permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
+        $permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>1,'deleted'=>0]]));
 
-        $this->set(compact('Permissions'));
+        $this->set(compact('permissions'));
     }
 
     public function inactives()
     {
-        $Permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
+        $permissions = $this->paginate($this->Permissions->find('all',['conditions'=>['active'=>0,'deleted'=>0]]));
 
-        $this->set(compact('Permissions'));
+        $this->set(compact('permissions'));
     }
 
     /**
@@ -39,11 +39,11 @@ class PermissionsController extends AppController
      */
     public function view($id = null)
     {
-        $Permission = $this->Permissions->get($id, [
+        $permission = $this->Permissions->get($id, [
             'contain' => ['Roles']
         ]);
 
-        $this->set(compact('Permission'));
+        $this->set(compact('permission'));
     }
 
     /**
@@ -53,18 +53,18 @@ class PermissionsController extends AppController
      */
     public function add()
     {
-        $Permission = $this->Permissions->newEmptyEntity();
+        $permission = $this->Permissions->newEmptyEntity();
         if ($this->request->is('post')) {
-            $Permission = $this->Permissions->patchEntity($Permission, $this->request->getData());
-            if ($this->Permissions->save($Permission)) {
+            $permission = $this->Permissions->patchEntity($permission, $this->request->getData());
+            if ($this->Permissions->save($permission)) {
                 $this->Flash->success(__('El Permiso ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Permiso no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $Roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
-        $this->set(compact('Permission', 'Roles'));
+        $roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
+        $this->set(compact('permission', 'roles'));
     }
 
     /**
@@ -76,20 +76,20 @@ class PermissionsController extends AppController
      */
     public function edit($id = null)
     {
-        $Permission = $this->Permissions->get($id, [
+        $permission = $this->Permissions->get($id, [
             'contain' => ['Roles'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $Permission = $this->Permissions->patchEntity($Permission, $this->request->getData());
-            if ($this->Permissions->save($Permission)) {
+            $permission = $this->Permissions->patchEntity($permission, $this->request->getData());
+            if ($this->Permissions->save($permission)) {
                 $this->Flash->success(__('El Permiso ha sido guardado con éxito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Permiso no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $Roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
-        $this->set(compact('Permission', 'Roles'));
+        $roles = $this->Permissions->Roles->find('all', ['conditions' => ['active' => 1 , 'deleted' => 0]]);
+        $this->set(compact('permission', 'roles'));
     }
 
     /**

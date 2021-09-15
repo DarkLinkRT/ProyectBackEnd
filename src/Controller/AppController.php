@@ -96,7 +96,7 @@ class AppController extends Controller
         $userData["name"] =  $this->request->getSession()->read('Auth.User.name');
         $userData["lastname"] =  $this->request->getSession()->read('Auth.User.last_name');
         $userData["user"] =  $this->request->getSession()->read('Auth.User.user');
-        $userData["roleUser"] =  $this->request->getSession()->read('Auth.User.role_id.name');
+        $userData["roleUser"] =  $this->request->getSession()->read('Auth.User.role.name');
         $userData["id"] =  $this->request->getSession()->read('Auth.User.id');
         $userData["hasPic"] = false;
         // Verify if the user has an pic profile

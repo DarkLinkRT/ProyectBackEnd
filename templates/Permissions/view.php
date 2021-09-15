@@ -1,65 +1,65 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CoPermission $coPermission
+ * @var \App\Model\Entity\permission $permission
  */
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Co Permission'), ['action' => 'edit', $coPermission->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Co Permission'), ['action' => 'delete', $coPermission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $coPermission->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Co Permission'), ['action' => 'edit', $permission->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Co Permission'), ['action' => 'delete', $permission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $permission->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Co Permissions'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Co Permission'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="coPermissions view content">
-            <h3><?= h($coPermission->name) ?></h3>
+        <div class="permissions view content">
+            <h3><?= h($permission->name) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Id') ?></th>
-                    <td><?= h($coPermission->id) ?></td>
+                    <td><?= h($permission->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Name') ?></th>
-                    <td><?= h($coPermission->name) ?></td>
+                    <td><?= h($permission->name) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Controller') ?></th>
-                    <td><?= h($coPermission->controller) ?></td>
+                    <td><?= h($permission->controller) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Action') ?></th>
-                    <td><?= h($coPermission->action) ?></td>
+                    <td><?= h($permission->action) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
-                    <td><?= h($coPermission->created) ?></td>
+                    <td><?= h($permission->created) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Modified') ?></th>
-                    <td><?= h($coPermission->modified) ?></td>
+                    <td><?= h($permission->modified) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Active') ?></th>
-                    <td><?= $coPermission->active ? __('Yes') : __('No'); ?></td>
+                    <td><?= $permission->active ? __('Yes') : __('No'); ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Deleted') ?></th>
-                    <td><?= $coPermission->deleted ? __('Yes') : __('No'); ?></td>
+                    <td><?= $permission->deleted ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
             <div class="text">
                 <strong><?= __('Description') ?></strong>
                 <blockquote>
-                    <?= $this->Text->autoParagraph(h($coPermission->description)); ?>
+                    <?= $this->Text->autoParagraph(h($permission->description)); ?>
                 </blockquote>
             </div>
             <div class="related">
                 <h4><?= __('Related Co Groups') ?></h4>
-                <?php if (!empty($coPermission->co_groups)) : ?>
+                <?php if (!empty($permission->co_groups)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -73,7 +73,7 @@
                             <th><?= __('Modified') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
-                        <?php foreach ($coPermission->co_groups as $coGroups) : ?>
+                        <?php foreach ($permission->co_groups as $coGroups) : ?>
                         <tr>
                             <td><?= h($coGroups->id) ?></td>
                             <td><?= h($coGroups->name) ?></td>

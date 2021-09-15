@@ -34,59 +34,59 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"><?= $coGroup->name ?></h4>
+                    <h4 class="card-title"><?= $role->name ?></h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
                         <!-- -->
-                        <?= $this->Form->create($coGroup,['class'=>'form form-vertical']) ?>
+                        <?= $this->Form->create($role,['class'=>'form form-vertical']) ?>
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Nombre</label>
-                                            <input type="text" id="name" class="form-control" name="name" placeholder="Nombre del rol" value="<?= $coGroup->name ?>">
+                                            <input type="text" id="name" class="form-control" name="name" placeholder="Nombre del rol" value="<?= $role->name ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Descripción</label>
-                                            <input type="text" id="description" class="form-control" name="description" placeholder="Descripción del rol" value="<?= $coGroup->description ?>">
+                                            <input type="text" id="description" class="form-control" name="description" placeholder="Descripción del rol" value="<?= $role->description ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Icono</label>
-                                            <input type="text" id="icon" class="form-control" name="icon" value="<?= $coGroup->icon ?>" placeholder="Icono del rol">
+                                            <input type="text" id="icon" class="form-control" name="icon" value="<?= $role->icon ?>" placeholder="Icono del rol">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Color</label>
-                                            <input type="text" id="color_icon" class="form-control" value="<?= $coGroup->color_icon ?>"  name="color_icon" placeholder="Color de icono del rol">
+                                            <input type="text" id="color_icon" class="form-control" value="<?= $role->color_icon ?>"  name="color_icon" placeholder="Color de icono del rol">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Menús</label>
-                                            <select class="select2-icons form-control" name="co_menus[_ids][]" multiple="multiple">
-                                                <?php $menus = 0;?>
-                                                    <?php foreach($coMenus as $menu){ ?>
+                                            <select class="select2-icons form-control" name="menus[_ids][]" multiple="multiple">
+                                                <?php $menusContador = 0;?>
+                                                    <?php foreach($menus as $menu){ ?>
                                                         <?php $haySelect = false;?>
-                                                        <?php foreach($coGroup->co_menus as $coGroupMenu){ ?>
-                                                            <?php if($coGroupMenu->id == $menu->id){ ?>
+                                                        <?php foreach($role->menus as $roleMenu){ ?>
+                                                            <?php if($roleMenu->id == $menu->id){ ?>
                                                                 <?php $haySelect = true;?>
-                                                                <?php $menus++; ?>
+                                                                <?php $menusContador++; ?>
                                                                 <option data-icon="feather <?= $menu->icon ?>" selected value="<?= $menu->id ?>" ><?= $menu->name ?></option>
                                                             <?php } ?>
                                                         <?php } ?>
                                                         <?php if(!$haySelect){ ?>
-                                                                <?php $menus++; ?>
+                                                                <?php $menusContador++; ?>
                                                                 <option data-icon="feather <?= $menu->icon ?>" value="<?= $menu->id ?>"><?= $menu->name ?></option>
                                                         <?php } ?>
                                                     <?php } ?>
-                                                    <?php if($menus==0){ ?>
-                                                        <?php foreach($coMenus as $menu){ ?>
+                                                    <?php if($menusContador==0){ ?>
+                                                        <?php foreach($menus as $menu){ ?>
                                                             <option data-icon="feather <?= $menu->icon ?>" value="<?= $menu->id ?>"><?= $menu->name ?></option>
                                                         <?php } ?>
                                                     <?php } ?>
@@ -96,25 +96,25 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Permisos</label>
-                                            <select class="select2 form-control" name="co_permissions[_ids][]" multiple="multiple">
-                                                    <?php $permissions = 0;?>
-                                                    <?php foreach($coPermissions as $permission){ ?>
+                                            <select class="select2 form-control" name="permissions[_ids][]" multiple="multiple">
+                                                    <?php $permissionsContador = 0;?>
+                                                    <?php foreach($permissions as $permission){ ?>
                                                         <?php $haySelect = false;?>
-                                                        <?php foreach($coGroup->co_permissions as $coGroupPermission){ ?>
-                                                            <?php if($coGroupPermission->id == $permission->id){ ?>
+                                                        <?php foreach($role->permissions as $rolePermission){ ?>
+                                                            <?php if($rolePermission->id == $permission->id){ ?>
                                                                 <?php $haySelect = true;?>
-                                                                <?php $permissions++; ?>
+                                                                <?php $permissionsContador++; ?>
                                                                 <option selected value="<?= $permission->id ?>" ><?= $permission->name ?></option>
                                                             <?php } ?>
                                                         <?php } ?>
                                                         <?php if(!$haySelect){ ?>
-                                                                <?php $permissions++; ?>
+                                                                <?php $permissionsContador++; ?>
                                                                 <option value="<?= $permission->id ?>"><?= $permission->name ?></option>
                                                         <?php } ?>
                                                     <?php } ?>
-                                                    <?php if($permissions==0){ ?>
-                                                        <?php foreach($coPermissions as $permission){ ?>
-                                                            <?php $permissions++; ?>
+                                                    <?php if($permissionsContador==0){ ?>
+                                                        <?php foreach($permissions as $permission){ ?>
+                                                            <?php $permissionsContador++; ?>
                                                             <option value="<?= $permission->id ?>"><?= $permission->name ?></option>
                                                         <?php } ?>
                                                     <?php } ?>
@@ -124,9 +124,9 @@
                                     <div class="col-12" id="divActivo">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Activo</label>
-                                            <input type="hidden" id="actives" class="form-control" name="active" placeholder="First Name" value="<?= $coGroup->active ? "1" : "0" ?>">
+                                            <input type="hidden" id="actives" class="form-control" name="active" placeholder="First Name" value="<?= $role->active ? "1" : "0" ?>">
                                             <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-                                                <input type="checkbox" <?= $coGroup->active == 1 ? "checked" : "" ?> class="custom-control-input" onclick="setActive();" id="customSwitch11">
+                                                <input type="checkbox" <?= $role->active == 1 ? "checked" : "" ?> class="custom-control-input" onclick="setActive();" id="customSwitch11">
                                                 <label class="custom-control-label" for="customSwitch11">
                                                     <span class="switch-icon-left"><i class="feather icon-check"></i></span>
                                                     <span class="switch-icon-right"><i class="feather icon-check"></i></span>
@@ -146,7 +146,7 @@
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $coGroup->name ?></h4>
+                                                                    <h4 class="modal-title" id="myModalLabel6">Eliminando <?= $role->name ?></h4>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -161,7 +161,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                                                                    <?= $this->Form->postLink('<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>', ['action' => 'delete', $coGroup->id],['escape' => false]) ?>
+                                                                    <?= $this->Form->postLink('<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>', ['action' => 'delete', $role->id],['escape' => false]) ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -179,7 +179,7 @@
 
 <script>
 
-    var active_switch = <?= $coGroup->active ? "1" : "0"  ?>;
+    var active_switch = <?= $role->active ? "1" : "0"  ?>;
 
     function resetThis(){
         var r = confirm("¿Reiniciar formulario? Se perderá los cambios que no ha guardado.");
