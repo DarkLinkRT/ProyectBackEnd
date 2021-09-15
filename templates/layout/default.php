@@ -54,6 +54,7 @@
     <?= $this->Html->css('/themes/vue/css/pages/card-analytics.css') ?>
     <?= $this->Html->css('/themes/vue/css/plugins/tour/tour.css') ?>
     <?= $this->Html->css('/themes/vue/css/pages/app-ecommerce-shop.css') ?>
+    <?= $this->Html->css('/themes/vue/css/pages/users.css') ?>
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
