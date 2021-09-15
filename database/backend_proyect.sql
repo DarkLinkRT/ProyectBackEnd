@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2021 a las 09:50:23
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.4.23
+-- Tiempo de generación: 15-09-2021 a las 23:50:53
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -104,11 +104,19 @@ CREATE TABLE `posts` (
   `id` char(36) COLLATE utf8_spanish_ci NOT NULL,
   `title` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `description` text COLLATE utf8_spanish_ci NOT NULL,
+  `picture` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_id` char(36) COLLATE utf8_spanish_ci NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 1,
   `deleted` tinyint(1) NOT NULL DEFAULT 0,
   `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `description`, `picture`, `user_id`, `active`, `deleted`, `created`) VALUES
+('c1b10920-8760-4b7d-a1a5-313fe8842032', 'prueba', 'prueba', NULL, 'fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', 1, 0, '2021-09-15 12:27:35');
 
 -- --------------------------------------------------------
 
@@ -222,6 +230,7 @@ CREATE TABLE `users` (
   `name` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
   `last_name` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
   `mother_last_name` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
+  `about` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `theme` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 1,
@@ -234,9 +243,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `user`, `password`, `name`, `last_name`, `mother_last_name`, `email`, `theme`, `active`, `deleted`, `created`, `modified`) VALUES
-('4b8d094c-eab6-47c2-a3ee-e90a7e5ecf02', '4ab19130-67fa-418c-9f39-513d1325977b', 'jorge', '$2y$10$ycQFcU/tLkVP3d41v5TVF.xPHLj2CZEa.rn3Gq7dPOcL9OtAppXeu', 'Jorge', 'Itza', 'Gomez', 'jorgeitza023@gmail.com', 'light', 1, 0, '2021-05-24 14:58:01', '2021-05-26 12:32:44'),
-('fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'admin', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Jodelle', 'Ferland', 'Micah', 'alessagillespie9y@hotmail.com', 'dark', 1, 0, '2021-05-10 14:07:37', '2021-09-15 02:22:10');
+INSERT INTO `users` (`id`, `role_id`, `user`, `password`, `name`, `last_name`, `mother_last_name`, `about`, `email`, `theme`, `active`, `deleted`, `created`, `modified`) VALUES
+('4b8d094c-eab6-47c2-a3ee-e90a7e5ecf02', '4ab19130-67fa-418c-9f39-513d1325977b', 'jorge', '$2y$10$ycQFcU/tLkVP3d41v5TVF.xPHLj2CZEa.rn3Gq7dPOcL9OtAppXeu', 'Jorge', 'Itza', 'Gomez', NULL, 'jorgeitza023@gmail.com', 'light', 1, 0, '2021-05-24 14:58:01', '2021-05-26 12:32:44'),
+('fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'admin', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Jodelle', 'Ferland', 'Micah', NULL, 'alessagillespie9y@hotmail.com', 'dark', 1, 0, '2021-05-10 14:07:37', '2021-09-15 13:18:06');
 
 --
 -- Índices para tablas volcadas

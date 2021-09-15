@@ -42,7 +42,7 @@
     <!-- BEGIN: Theme CSS-->
     <?= $this->Html->css('/themes/vue/css/bootstrap.css') ?>
     <?= $this->Html->css('/themes/vue/css/bootstrap-extended.css') ?>
-    <?= $this->Html->css('/themes/vue/css/colors.css') ?>
+    <?= $this->Html->css('/themes/vue/css/colors.css') ?>  
     <?= $this->Html->css('/themes/vue/css/components.css') ?>
     <?= $this->Html->css('/themes/vue/css/themes/dark-layout.css') ?>
     <?= $this->Html->css('/themes/vue/css/themes/semi-dark-layout.css') ?>
@@ -50,6 +50,7 @@
     <!-- BEGIN: Page CSS-->
     <?= $this->Html->css('/themes/vue/css/core/menu/menu-types/vertical-menu.css') ?>
     <?= $this->Html->css('/themes/vue/css/core/colors/palette-gradient.css') ?>
+    <?= $this->Html->css('/themes/vue/css/plugins/animate/animate.css') ?> 
     <?= $this->Html->css('/themes/vue/css/pages/dashboard-analytics.css') ?>
     <?= $this->Html->css('/themes/vue/css/pages/card-analytics.css') ?>
     <?= $this->Html->css('/themes/vue/css/plugins/tour/tour.css') ?>
@@ -66,6 +67,14 @@
     <style>
         .card {
             margin: 0 !important;
+        }
+        body.dark-layout .header-navbar-shadow {
+            background: linear-gradient( 
+            180deg
+            , rgb(23 23 23) 7%, rgb(35 35 35 / 43%) 73%, rgb(0 0 0 / 0%)) !important;
+        }
+        .custom-file-input:lang(en) ~ .custom-file-label::after {
+            content: "Adjuntar imagen" !important;
         }
     </style>
 
@@ -134,8 +143,7 @@
 
     <script>
     
-     /***************/var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;/********************* */
-     var route_theme_change = "<?= $this->Url->build(["controller" => "users","action" => "settheme"]);?>";
+         var route_theme_change = "<?= $this->Url->build(["controller" => "users","action" => "settheme"]);?>";
 
     </script>
 

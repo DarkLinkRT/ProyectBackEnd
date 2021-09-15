@@ -28,11 +28,11 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">
+                                <!-- <a class="dropdown-item" href="#">
                                     <i class="feather icon-user"></i> Editar perfil
-                                </a>
+                                </a> -->
                               
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div> -->
                                 <?= $this->Html->link(' <i class="feather icon-power"></i> Cerrar sesión',['escape'=>false,'controller'=>'users','action'=>'logout'],['escape'=>false,'class'=>'dropdown-item']) ?>
                             </div>
                         </li>

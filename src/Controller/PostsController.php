@@ -26,6 +26,19 @@ class PostsController extends AppController
         $this->set(compact('posts'));
     }
 
+    public function getNews(){
+
+        $this->viewBuilder()->setLayout("ajax");
+        $posts = $this->Posts->find('all',
+            [
+                'condition' => [ 'active' => 1 , 'deleted' => 0 ],
+                'contain' => ['Users']
+            ]
+        );
+        return $this->response->withType("application/json")->withStringBody(json_encode($posts));
+
+    }
+
     /**
      * View method
      *
@@ -61,6 +74,19 @@ class PostsController extends AppController
         }
         $users = $this->Posts->Users->find('list', ['limit' => 200]);
         $this->set(compact('post', 'users'));
+    }
+
+    public function new(){
+        $this->viewBuilder()->setLayout("ajax");
+        $post = $this->Posts->newEmptyEntity();
+        $post->user_id = $this->request->getSession()->read('Auth.User.id');
+        if ($this->request->is('post')) {
+            $post = $this->Posts->patchEntity($post, $this->request->getData());
+            if ($this->Posts->save($post)) {
+                return $this->response->withType("application/json")->withStringBody(json_encode(1));
+            }
+        }
+        return $this->response->withType("application/json")->withStringBody(json_encode(0));
     }
 
     /**
