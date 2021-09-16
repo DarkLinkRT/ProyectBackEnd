@@ -307,8 +307,8 @@
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
-                                                                    '<a data-toggle="modal" data-target="#edit'+data[indice]['user']['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['user']['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                    '<a data-toggle="modal" data-target="#edit'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+
@@ -316,7 +316,7 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                                    '<div class="modal fade text-left" id="edit'+data[indice]['user']['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
+                                                    '<div class="modal fade text-left" id="edit'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
                                                         ' <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                             '  <div class="modal-content">'+
                                                                 '  <div class="modal-header">'+
@@ -329,22 +329,22 @@
                                                                     '   <div class="modal-body">'+
                                                                         '    <label>Título: </label>'+
                                                                         '   <div class="form-group">'+
-                                                                        '    <input type="text" placeholder="" id="" class="form-control" value="'+ data[indice]['title']+'">'+
+                                                                        '    <input type="text" placeholder="" id="title'+data[indice]['id']+'" class="form-control" value="'+ data[indice]['title']+'">'+
                                                                         '</div>'+
 
                                                                         '<label>Descripción: </label>'+
                                                                         ' <div class="form-group">'+
-                                                                            ' <textarea class="form-control char-textarea active" id="description_post" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none">'+ data[indice]['description']+'</textarea>'+
+                                                                            ' <textarea class="form-control char-textarea active"  id="description'+data[indice]['id']+'" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none">'+ data[indice]['description']+'</textarea>'+
                                                                         '  </div>'+
                                                                         '  </div>'+
                                                                         ' <div class="modal-footer">'+
-                                                                             ' <button type="button" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Guardar</button>'+
+                                                                             ' <button type="button" id="'+data[indice]['id']+'" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" onclick="updatePost(this);">Guardar</button>'+
                                                                         ' </div>'+
                                                                 ' </form>'+
                                                             ' </div>'+
                                                         '</div>'+
                                                     ' </div>'+
-                                                    '<div class="modal fade text-left" id="delete'+data[indice]['user']['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '<div class="modal fade text-left" id="delete'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
                                                     '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                     '       <div class="modal-content">'+
                                                     '           <div class="modal-header">'+
@@ -443,8 +443,8 @@
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
-                                                                            '<a data-toggle="modal" data-target="#edit'+data[indice]['user']['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['user']['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                            '<a data-toggle="modal" data-target="#edit'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+
@@ -452,7 +452,7 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                                    '<div class="modal fade text-left" id="edit'+data[indice]['user']['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
+                                                    '<div class="modal fade text-left" id="edit'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
                                                         ' <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                             '  <div class="modal-content">'+
                                                                 '  <div class="modal-header">'+
@@ -465,22 +465,22 @@
                                                                     '   <div class="modal-body">'+
                                                                         '    <label>Título: </label>'+
                                                                         '   <div class="form-group">'+
-                                                                        '    <input type="text" placeholder="" id="" class="form-control" value="'+ data[indice]['title']+'">'+
+                                                                        '    <input type="text" placeholder="" id="title'+data[indice]['id']+'" class="form-control" value="'+ data[indice]['title']+'">'+
                                                                         '</div>'+
 
                                                                         '<label>Descripción: </label>'+
                                                                         ' <div class="form-group">'+
-                                                                            ' <textarea class="form-control char-textarea active" id="description_post" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none">'+ data[indice]['description']+'</textarea>'+
+                                                                            ' <textarea class="form-control char-textarea active"  id="description'+data[indice]['id']+'" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none">'+ data[indice]['description']+'</textarea>'+
                                                                         '  </div>'+
                                                                         '  </div>'+
                                                                         ' <div class="modal-footer">'+
-                                                                             ' <button type="button" class="btn btn-primary waves-effect waves-light" data-dismiss="modal">Guardar</button>'+
+                                                                        ' <button type="button" id="'+data[indice]['id']+'" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" onclick="updatePost(this);">Guardar</button>'+
                                                                         ' </div>'+
                                                                 ' </form>'+
                                                             ' </div>'+
                                                         '</div>'+
                                                     ' </div>'+
-                                                    '<div class="modal fade text-left" id="delete'+data[indice]['user']['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '<div class="modal fade text-left" id="delete'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
                                                     '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                     '       <div class="modal-content">'+
                                                     '           <div class="modal-header">'+
@@ -508,6 +508,49 @@
 
                                                  
                 })
+            }
+        })
+    }
+
+    //Funcion para actualizar el post
+    function updatePost(e){
+        var id = e.id;
+        var title = $('#title' + id).val();
+        var description = $('#description' + id).val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },    
+            type: "POST",
+            data: { title : title , description : description },
+            url: "<?= $this->Url->build(["controller" => "posts","action" => "edit" ]);?>/"+id,
+            success:function(data){
+
+                loadMyNews();
+                loadNoticias();
+
+            }
+        })
+    }
+
+    function deletePost(e){
+        var id = e.id;
+        var title = $('#title' + id).val();
+        var description = $('#description' + id).val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },    
+            type: "POST",
+            data: { title : title , description : description },
+            url: "<?= $this->Url->build(["controller" => "posts","action" => "edit" ]);?>/"+id,
+            success:function(data){
+
+                loadMyNews();
+                loadNoticias();
+
             }
         })
     }
