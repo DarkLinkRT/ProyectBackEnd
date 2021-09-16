@@ -307,8 +307,8 @@
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
-                                                                    '<a data-toggle="modal" data-target="#edit'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                    '<a data-toggle="modal" data-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a data-toggle="modal" data-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+
@@ -316,7 +316,7 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                                    '<div class="modal fade text-left" id="edit'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
+                                                    '<div class="modal fade text-left" id="edit1'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
                                                         ' <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                             '  <div class="modal-content">'+
                                                                 '  <div class="modal-header">'+
@@ -344,7 +344,7 @@
                                                             ' </div>'+
                                                         '</div>'+
                                                     ' </div>'+
-                                                    '<div class="modal fade text-left" id="delete'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '<div class="modal fade text-left" id="delete1'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
                                                     '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                     '       <div class="modal-content">'+
                                                     '           <div class="modal-header">'+
@@ -363,7 +363,7 @@
                                                     '           </div>'+
                                                     '           <div class="modal-footer">'+
                                                     '               <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>'+
-                                                    '               <button type="button" class="btn btn-primary">Aceptar</button>'+
+                                                    '               <button id="'+data[indice]['id']+'" type="button" class="btn btn-primary"  data-dismiss="modal" onclick="deletePost(this);">Aceptar</button>'+
                                                     '           </div>'+
                                                     '       </div>'+
                                                     '   </div>'+
@@ -443,8 +443,8 @@
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
-                                                                            '<a data-toggle="modal" data-target="#edit'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a data-toggle="modal" data-target="#delete'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                            '<a data-toggle="modal" data-target="#edit2'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a data-toggle="modal" data-target="#delete2'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+
@@ -452,7 +452,7 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                                    '<div class="modal fade text-left" id="edit'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
+                                                    '<div class="modal fade text-left" id="edit2'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
                                                         ' <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                             '  <div class="modal-content">'+
                                                                 '  <div class="modal-header">'+
@@ -480,7 +480,7 @@
                                                             ' </div>'+
                                                         '</div>'+
                                                     ' </div>'+
-                                                    '<div class="modal fade text-left" id="delete'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
+                                                    '<div class="modal fade text-left" id="delete2'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">'+
                                                     '   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                     '       <div class="modal-content">'+
                                                     '           <div class="modal-header">'+
@@ -499,7 +499,7 @@
                                                     '           </div>'+
                                                     '           <div class="modal-footer">'+
                                                     '               <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>'+
-                                                    '               <button type="button" class="btn btn-primary">Aceptar</button>'+
+                                                    '               <button id="'+data[indice]['id']+'" type="button" class="btn btn-primary"  data-dismiss="modal" onclick="deletePost(this);">Aceptar</button>'+
                                                     '           </div>'+
                                                     '       </div>'+
                                                     '   </div>'+
@@ -536,16 +536,13 @@
 
     function deletePost(e){
         var id = e.id;
-        var title = $('#title' + id).val();
-        var description = $('#description' + id).val();
-
+    
         $.ajax({
             headers: {
                 'X-CSRF-Token': csrfToken
             },    
             type: "POST",
-            data: { title : title , description : description },
-            url: "<?= $this->Url->build(["controller" => "posts","action" => "edit" ]);?>/"+id,
+            url: "<?= $this->Url->build(["controller" => "posts","action" => "delete" ]);?>/"+id,
             success:function(data){
 
                 loadMyNews();

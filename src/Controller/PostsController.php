@@ -31,8 +31,7 @@ class PostsController extends AppController
         $this->viewBuilder()->setLayout("ajax");
         $posts = $this->Posts->find('all',
             [
-                'condition' => [ 'active' => 1 , 'deleted' => 0 ],
-                'contain' => ['Users'],
+                'contain' => ['Users' => ['conditions' => ['Posts.active' => 1 , 'Posts.deleted' => 0]]],
                 'order' => ['Posts.created' => 'DESC']
             ]
         );
@@ -45,8 +44,7 @@ class PostsController extends AppController
         $this->viewBuilder()->setLayout("ajax");
         $posts = $this->Posts->find('all',
             [
-                'condition' => [ 'Posts.active' => 0 , 'Posts.deleted' => 0 , 'Posts.user_id' => $this->request->getSession()->read('Auth.User.id') ],
-                'contain' => ['Users' => ['conditions' => ['Users.id' =>  $this->request->getSession()->read('Auth.User.id')]]],
+                'contain' => ['Users' => ['conditions' => ['Users.id' =>  $this->request->getSession()->read('Auth.User.id') , 'Posts.active' => 1 , 'Posts.deleted' => 0]]],
                 'order' => ['Posts.created' => 'DESC']
             ]
         );
@@ -137,12 +135,14 @@ class PostsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $post = $this->Posts->get($id);
-        if ($this->Posts->delete($post)) {
-            $this->Flash->success(__('The post has been deleted.'));
+        $post->deleted = 1;
+        $post->active = 0;
+        if ($this->Posts->save($post)) {
+            return $this->response->withType("application/json")->withStringBody(json_encode(1));
         } else {
-            $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+            return $this->response->withType("application/json")->withStringBody(json_encode(0));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->response->withType("application/json")->withStringBody(json_encode(0));
     }
 }
