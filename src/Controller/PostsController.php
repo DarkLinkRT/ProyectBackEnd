@@ -27,7 +27,7 @@ class PostsController extends AppController
     }
 
     public function getNews(){
-
+        $this->request->allowMethod(['get']);
         $this->viewBuilder()->setLayout("ajax");
         $posts = $this->Posts->find('all',
             [
@@ -40,7 +40,7 @@ class PostsController extends AppController
     }
 
     public function getNewsByUser(){
-
+        $this->request->allowMethod(['get']);
         $this->viewBuilder()->setLayout("ajax");
         $posts = $this->Posts->find('all',
             [
@@ -91,6 +91,7 @@ class PostsController extends AppController
     }
 
     public function new(){
+        $this->request->allowMethod(['post']);
         $this->viewBuilder()->setLayout("ajax");
         $post = $this->Posts->newEmptyEntity();
         $post->user_id = $this->request->getSession()->read('Auth.User.id');
@@ -112,11 +113,12 @@ class PostsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->request->allowMethod(['put']);
         $this->viewBuilder()->setLayout("ajax");
         $post = $this->Posts->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is('post')) {
+        if ($this->request->is('put')) {
             $post = $this->Posts->patchEntity($post, $this->request->getData());
             if ($this->Posts->save($post)) {
                 return $this->response->withType("application/json")->withStringBody(json_encode(1));
@@ -134,7 +136,7 @@ class PostsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['delete']);
         $post = $this->Posts->get($id);
         $post->deleted = 1;
         $post->active = 0;

@@ -551,7 +551,7 @@
             headers: {
                 'X-CSRF-Token': csrfToken
             },    
-            type: "POST",
+            type: "PUT",
             data: { title : title , description : description },
             url: "<?= $this->Url->build(["controller" => "posts","action" => "edit" ]);?>/"+id,
             success:function(data){
@@ -570,7 +570,7 @@
             headers: {
                 'X-CSRF-Token': csrfToken
             },    
-            type: "POST",
+            type: "DELETE",
             url: "<?= $this->Url->build(["controller" => "posts","action" => "delete" ]);?>/"+id,
             success:function(data){
 
