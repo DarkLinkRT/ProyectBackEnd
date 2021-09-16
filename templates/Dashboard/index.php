@@ -276,11 +276,25 @@
 
                     fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
 
+                    var pic = "";
+
+                    $.ajax({
+                        url : '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg',
+                        type : "get",
+                        async: false,
+                        success : function(userStatus) {
+                           pic = '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg';
+                        },
+                        error: function() {
+                            pic = "<?= $this->Url->Image('/files/default/defaultpic.jpg') ?>"
+                        }
+                    });
+
                     $('#areaNoticias').append('<div class="card" style="margin-bottom:10px !important">'+
                                                     '<div class="card-body">'+
                                                         '<div class="d-flex justify-content-start align-items-center mb-1">'+
                                                             '<div class="avatar mr-1">'+
-                                                                ' <img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg" alt="avtar img holder" height="45" width="45">'+
+                                                                ' <img src="'+pic+'" alt="avtar img holder" height="45" width="45">'+
                                                             ' </div>'+
                                                             ' <div class="user-page-info">'+
                                                                 ' <p class="mb-0">' + data[indice]['user']['name'] + " " + data[indice]['user']['last_name'] + " " + data[indice]['user']['mother_last_name'] +'</p>'+
@@ -341,6 +355,21 @@
 
                     fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
 
+                    
+                    var pic = "";
+
+                    $.ajax({
+                        url : '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg',
+                        type : "get",
+                        async: false,
+                        success : function(userStatus) {
+                        pic = '<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg';
+                        },
+                        error: function() {
+                            pic = "<?= $this->Url->Image('/files/default/defaultpic.jpg') ?>"
+                        }
+                    });
+
                     $('#areaNoticiasUser').append('<div class="card" style="margin-bottom:10px !important">'+
                                                     '<div class="card-body">'+
                                                          '<div class="d-flex justify-content-end align-items-center mb-1">'+
@@ -348,7 +377,7 @@
                                                             '</div>'+
                                                         '<div class="d-flex justify-content-start align-items-center mb-1">'+
                                                             '<div class="avatar mr-1">'+
-                                                                ' <img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg" alt="avtar img holder" height="45" width="45">'+
+                                                                ' <img src="'+pic+'" alt="avtar img holder" height="45" width="45">'+
                                                             ' </div>'+
                                                             ' <div class="user-page-info">'+
                                                                 ' <p class="mb-0">' + data[indice]['user']['name'] + " " + data[indice]['user']['last_name'] + " " + data[indice]['user']['mother_last_name'] +'</p>'+
@@ -369,7 +398,9 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                            ' </div>');                        
+                                            ' </div>');    
+
+                                                 
                 })
             }
         })
