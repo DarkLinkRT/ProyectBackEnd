@@ -293,7 +293,7 @@
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
                                                                             '<a class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a class="dropdown-item disabled" href="#">Eliminar</a>'+
+                                                                            ' <a class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+
@@ -361,7 +361,7 @@
                                                                     '  </button>'+
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
                                                                             '<a class="dropdown-item" href="#">Editar</a>'+
-                                                                            ' <a class="dropdown-item disabled" href="#">Eliminar</a>'+
+                                                                            ' <a class="dropdown-item" href="#">Eliminar</a>'+
                                                                         '</div>'+
                                                                 '  </div>'+
                                                         ' </div>'+

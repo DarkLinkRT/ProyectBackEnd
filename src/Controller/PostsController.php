@@ -45,8 +45,8 @@ class PostsController extends AppController
         $this->viewBuilder()->setLayout("ajax");
         $posts = $this->Posts->find('all',
             [
-                'condition' => [ 'active' => 0 , 'deleted' => 0 , 'user_id' => $this->request->getSession()->read('Auth.User.id') ],
-                'contain' => ['Users'],
+                'condition' => [ 'Posts.active' => 0 , 'Posts.deleted' => 0 , 'Posts.user_id' => $this->request->getSession()->read('Auth.User.id') ],
+                'contain' => ['Users' => ['conditions' => ['Users.id' =>  $this->request->getSession()->read('Auth.User.id')]]],
                 'order' => ['Posts.created' => 'DESC']
             ]
         );
