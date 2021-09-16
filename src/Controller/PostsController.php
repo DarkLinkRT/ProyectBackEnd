@@ -59,14 +59,14 @@ class PostsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
-        $post = $this->Posts->get($id, [
-            'contain' => ['Users'],
-        ]);
+    // public function view($id = null)
+    // {
+    //     $post = $this->Posts->get($id, [
+    //         'contain' => ['Users'],
+    //     ]);
 
-        $this->set(compact('post'));
-    }
+    //     $this->set(compact('post'));
+    // }
 
     /**
      * Add method

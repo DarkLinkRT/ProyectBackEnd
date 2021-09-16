@@ -77,9 +77,9 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Roles</label>
-                                            <select class="select2 form-control" name="co_groups[_ids][]" multiple="multiple">
-                                                <?php foreach($coGroups as $group){ ?>
-                                                    <option value="<?= $group->id ?>"><?= $group->name ?></option>
+                                            <select class="select2 form-control" name="roles[_ids][]" multiple="multiple">
+                                                <?php foreach($roles as $rol){ ?>
+                                                    <option value="<?= $rol->id ?>"><?= $rol->name ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
