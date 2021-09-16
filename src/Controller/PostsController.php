@@ -32,7 +32,22 @@ class PostsController extends AppController
         $posts = $this->Posts->find('all',
             [
                 'condition' => [ 'active' => 1 , 'deleted' => 0 ],
-                'contain' => ['Users']
+                'contain' => ['Users'],
+                'order' => ['Posts.created' => 'DESC']
+            ]
+        );
+        return $this->response->withType("application/json")->withStringBody(json_encode($posts));
+
+    }
+
+    public function getNewsByUser(){
+
+        $this->viewBuilder()->setLayout("ajax");
+        $posts = $this->Posts->find('all',
+            [
+                'condition' => [ 'active' => 0 , 'deleted' => 0 , 'user_id' => $this->request->getSession()->read('Auth.User.id') ],
+                'contain' => ['Users'],
+                'order' => ['Posts.created' => 'DESC']
             ]
         );
         return $this->response->withType("application/json")->withStringBody(json_encode($posts));

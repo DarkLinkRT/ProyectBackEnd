@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
-                                <div class="card" style="margin-bottom:10px !important">
+                                <div class="card" style="margin-bottom:10px !important" id="cardNuevo">
                                     <div class="card-body" style="padding: 0.5rem;">
                                         <div class="">
                                             <div class="default-collapse collapse-bordered">
@@ -102,15 +102,6 @@
                                                                         <label for="textarea-counter">Descripción</label>
                                                                     </fieldset>
                                                                 </div>
-                                                                <div class="">
-                                                                    <fieldset class="form-group">
-                                                                        <label for="basicInputFile"></label>
-                                                                        <div class="custom-file">
-                                                                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                                                            <label class="custom-file-label" for="inputGroupFile01"></label>
-                                                                        </div>
-                                                                    </fieldset>
-                                                                </div>
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -125,6 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="areaNoticiasUser"></div>
                             </div>
                             <div class="col-lg-3 col-12">
                                 <div class="card">
@@ -168,7 +160,7 @@
                     </section>
 
 
-                    <section id="noticias_section">
+                    <section id="noticias_section" style="display:none">
                         <div class="row">
                             <div class="col-lg-2 col-12">
                                 
@@ -184,7 +176,7 @@
                         </div>
                     </section>
 
-                    <section id="ajustes_section">
+                    <section id="ajustes_section" style="display:none">
                         <div class="row">
                             <div class="col-lg-3 col-12">
                                 
@@ -210,8 +202,14 @@
 
     $('#post_name').click(function(){
 
+        $('#cardNuevo').css('opacity','0.5');
+        $('#post_name').attr('disabled','disabled');
+
         var title = $('#title_post').val();
         var description = $('#description_post').val();
+
+        $('#title_post').attr("disabled","disabled");
+        $('#description_post').attr("disabled","disabled");
 
         //Validar los campos que no esten vacios
 
@@ -224,9 +222,25 @@
             url: "<?= $this->Url->build(["controller" => "posts","action" => "new"]);?>",
             success:function(data){
                
+                $('#cardNuevo').css('opacity','1');
+                $('#post_name').removeAttr('disabled','disabled');
+
+                $('#title_post').removeAttr("disabled","disabled");
+                $('#description_post').removeAttr("disabled","disabled");
+
+                $('#title_post').val("");
+                $('#description_post').val("");
+
+                loadMyNews();
+
+                $('#headingCollapse1').click();
+
             }
         })
     })
+
+    loadNoticias();
+    loadMyNews();
 
     //Funcion de carga de noticias
     function loadNoticias(){
@@ -273,7 +287,85 @@
                                                                 '<span class="font-small-2">' + fechaFormat +'</span>'+
                                                             '</div>'+
                                                             '<div class="ml-auto user-like text-danger"></div>'+
+                                                            '<div class="btn-group dropdown mr-1 mb-1 ">'+
+                                                                '  <button type="button" class="btn btn-outline-info dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                                                    '  <i class="feather icon-settings"></i> '+
+                                                                    '  </button>'+
+                                                                    '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
+                                                                            '<a class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a class="dropdown-item disabled" href="#">Eliminar</a>'+
+                                                                        '</div>'+
+                                                                '  </div>'+
                                                         ' </div>'+
+                                                        '<p style="font-size:16px"><b>' + data[indice]['title'] + '</b></p>'+
+                                                        '<p>' + data[indice]['description'] + '</p>'+
+                                                        //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
+                                                    '</div>'+
+                                            ' </div>');                        
+                })
+            }
+        })
+    }
+
+    //Funcion de carga
+    function loadMyNews(){
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },    
+            type: "GET",
+            url: "<?= $this->Url->build(["controller" => "posts","action" => "getNewsByUser"]);?>",
+            success:function(data){
+                $('#areaNoticiasUser').empty();
+                $(data).each(function(indice,registro){        
+                    //$('#areaNoticias').append('<option value="'+data[indice]['id']+'"> '+data[indice]['name']+' </option>');
+                    var fechaFormat = "";
+                    var fechasyhoras = data[indice]['created'].split("T");
+                    var fecha = fechasyhoras[0].split("-");
+                    var mes = "";
+                    if( fecha[1] == "01"){ mes = "Enero";}
+                    if( fecha[1] == "02"){ mes = "Febrero";}
+                    if( fecha[1] == "03"){ mes = "Marzo";}
+                    if( fecha[1] == "04"){ mes = "Abril";}
+                    if( fecha[1] == "05"){ mes = "Mayo";}
+                    if( fecha[1] == "06"){ mes = "Junio";}
+                    if( fecha[1] == "07"){ mes = "Julio";}
+                    if( fecha[1] == "08"){ mes = "Agosto";}
+                    if( fecha[1] == "09"){ mes = "Septiembre";}
+                    if( fecha[1] == "10"){ mes = "Octubre";}
+                    if( fecha[1] == "11"){ mes = "Noviembre";}
+                    if( fecha[1] == "12"){ mes = "Diciembre";}
+                    var horas = fechasyhoras[1].split("-");
+                    var horaB = horas[0].split(":");
+                    var hora = horaB[0] + ":" + horaB[1];
+
+                    fechaFormat = fecha[2] + " de " + mes + " del " + fecha[0] + " a las " + hora;
+
+                    $('#areaNoticiasUser').append('<div class="card" style="margin-bottom:10px !important">'+
+                                                    '<div class="card-body">'+
+                                                         '<div class="d-flex justify-content-end align-items-center mb-1">'+
+                                                             
+                                                            '</div>'+
+                                                        '<div class="d-flex justify-content-start align-items-center mb-1">'+
+                                                            '<div class="avatar mr-1">'+
+                                                                ' <img src="<?= $this->Url->Image('/files/userfiles/') ?>'+data[indice]['user']['id']+'/picture/200.jpg" alt="avtar img holder" height="45" width="45">'+
+                                                            ' </div>'+
+                                                            ' <div class="user-page-info">'+
+                                                                ' <p class="mb-0">' + data[indice]['user']['name'] + " " + data[indice]['user']['last_name'] + " " + data[indice]['user']['mother_last_name'] +'</p>'+
+                                                                '<span class="font-small-2">' + fechaFormat +'</span>'+
+                                                            '</div>'+
+                                                            '<div class="ml-auto user-like text-danger"></div>'+
+                                                            '<div class="btn-group dropdown mr-1 mb-1 ">'+
+                                                                '  <button type="button" class="btn btn-outline-info dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                                                    '  <i class="feather icon-settings"></i> '+
+                                                                    '  </button>'+
+                                                                    '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
+                                                                            '<a class="dropdown-item" href="#">Editar</a>'+
+                                                                            ' <a class="dropdown-item disabled" href="#">Eliminar</a>'+
+                                                                        '</div>'+
+                                                                '  </div>'+
+                                                        ' </div>'+
+                                                        '<p style="font-size:16px"><b>' + data[indice]['title'] + '</b></p>'+
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
@@ -293,6 +385,7 @@
     })
 
     $('#mi_perfil').click(function(){
+        loadMyNews();
         setBtnPerfil();
         $('#mi_perfil').empty();
         $('#mi_perfil').append('<button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Perfil</button>');
