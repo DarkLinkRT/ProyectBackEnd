@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2021 a las 23:50:53
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.34
+-- Tiempo de generación: 16-09-2021 a las 11:11:40
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,9 +90,15 @@ CREATE TABLE `permissions` (
 INSERT INTO `permissions` (`id`, `name`, `description`, `controller`, `action`, `active`, `deleted`, `created`, `modified`) VALUES
 ('0a259ce5-e7f4-4515-8db5-5d69bc619bd5', 'Acceder al Inicio', 'Acceder al Inicio', 'Dashboard', 'dashboard', 1, 0, '2021-05-15 12:51:01', '2021-09-14 22:28:27'),
 ('0a449318-92d2-42c2-87f1-892e5f5b181d', 'Acceder a Mis Pedidos', 'Acceso a Mis Pedidos', 'Orders', 'myorders', 1, 1, '2021-05-15 12:52:13', '2021-09-14 22:28:39'),
+('11c441eb-439f-45f1-aa2a-bf20cc651779', 'Obtener publicaciones por usuario', 'Obtener publicaciones del usuario por ajax', 'Posts', 'getNewsByUser', 1, 0, '2021-09-16 02:17:06', '2021-09-16 02:22:01'),
+('3a9a9c9d-f64f-43a5-b74d-948756dbc9b9', 'Agregar publicacion (Ajax)', 'Registro de la publicación por Ajax', 'Posts', 'new', 1, 0, '2021-09-16 02:19:38', '2021-09-16 02:22:10'),
 ('3f641f33-7ee4-432b-8b9c-a86b7ea04f7f', 'Acceder a la cuenta del usuario', 'Acceder a la cuenta del usuario', 'Users', 'account', 1, 1, '2021-05-15 12:53:47', '2021-09-14 22:28:48'),
 ('4105f8cb-112d-44a6-8d06-41989dd14a92', 'Todos los permisos', 'Todos los permisos y acciones del sistema', '*', '*', 1, 0, '2021-04-30 14:52:34', '2021-04-30 14:52:34'),
-('7797caa8-ce3f-4ebf-bd35-e937820c5592', 'Ver productos', 'Ver la lista de los productos', 'CatProducts', 'index', 1, 1, '2021-05-15 12:53:00', '2021-09-14 22:27:59');
+('59f78980-68ee-47bf-9d86-48a4dc6dfae2', 'Editar publicación', 'Editar publicación', 'Posts', 'edit', 1, 0, '2021-09-16 02:21:00', '2021-09-16 02:22:27'),
+('7797caa8-ce3f-4ebf-bd35-e937820c5592', 'Ver productos', 'Ver la lista de los productos', 'CatProducts', 'index', 1, 1, '2021-05-15 12:53:00', '2021-09-14 22:27:59'),
+('98a5c72b-614d-4e2d-8f46-b27c3b80719e', 'Agregar publicacion', 'Agregar Publicación', 'Posts', 'add', 1, 0, '2021-09-16 02:18:41', '2021-09-16 02:22:22'),
+('ae3fd3d9-6f43-4131-b4c2-4401f0195688', 'Eliminar publicación', 'Eliminar publicación', 'Posts', 'delete', 1, 0, '2021-09-16 02:21:42', '2021-09-16 02:21:42'),
+('ed223149-fece-48ea-807d-1e9891825d5b', 'Obtener Publicaciones', 'Obtener publicaciones por Ajax', 'Posts', 'getNews', 1, 0, '2021-09-16 02:16:16', '2021-09-16 02:21:53');
 
 -- --------------------------------------------------------
 
@@ -116,7 +122,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `description`, `picture`, `user_id`, `active`, `deleted`, `created`) VALUES
-('c1b10920-8760-4b7d-a1a5-313fe8842032', 'prueba', 'prueba', NULL, 'fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', 1, 0, '2021-09-15 12:27:35');
+('c1b10920-8760-4b7d-a1a5-313fe8842032', 'Inicio de publicación', 'Candy jelly beans powder brownie biscuit. Jelly marzipan oat cake cake. Cupcake I love wafer cake. Halvah I love powder jelly I love cheesecake cotton candy tiramisu brownie.', NULL, 'fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', 1, 0, '2021-09-15 12:27:35');
 
 -- --------------------------------------------------------
 
@@ -209,12 +215,31 @@ CREATE TABLE `roles_permissions` (
 --
 
 INSERT INTO `roles_permissions` (`id`, `role_id`, `permission_id`) VALUES
+('1c2d3dab-9998-4197-b2e3-0bb81ad6be83', '4105f8cb-112d-44a6-8d06-41989dd14a92', '59f78980-68ee-47bf-9d86-48a4dc6dfae2'),
+('2c644dd2-b1fb-46cf-bcc6-15ca815f2f63', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '98a5c72b-614d-4e2d-8f46-b27c3b80719e'),
+('35ed9721-947f-4ed6-aea0-e17843605fa9', '54a73610-9e57-4714-a448-7f488df29a5a', 'ed223149-fece-48ea-807d-1e9891825d5b'),
 ('4105f8cb-112d-44a6-8d06-41989dd14a92', '4105f8cb-112d-44a6-8d06-41989dd14a92', '4105f8cb-112d-44a6-8d06-41989dd14a92'),
 ('4497b37a-75d7-47c7-be65-bc099454603d', '4ab19130-67fa-418c-9f39-513d1325977b', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5'),
+('4a4b580d-7813-4fd5-ab26-e2aa84bb66be', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '3a9a9c9d-f64f-43a5-b74d-948756dbc9b9'),
+('4cce11fe-13bd-459b-adc8-40eee7e266be', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '11c441eb-439f-45f1-aa2a-bf20cc651779'),
 ('5a91b191-0f1e-48af-ac09-ea3436563e9c', '2d16d379-3a35-4fa2-b6db-6fd74808a3e5', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5'),
 ('6c6322db-caa5-4ea8-83a4-c07f13e2e667', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5'),
+('6e767c94-23f8-4817-8b75-aaf0c2cdda6c', '4105f8cb-112d-44a6-8d06-41989dd14a92', '98a5c72b-614d-4e2d-8f46-b27c3b80719e'),
+('7b23b91e-d3e7-4978-a748-26bd423d1768', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', '3a9a9c9d-f64f-43a5-b74d-948756dbc9b9'),
+('7b573552-eeca-4f74-a938-46361fd0b25f', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', '98a5c72b-614d-4e2d-8f46-b27c3b80719e'),
 ('8bf732e6-674b-4204-9267-8f302521af5d', '54a73610-9e57-4714-a448-7f488df29a5a', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5'),
-('d24ed44c-0a19-47c1-95b1-d401172dbadb', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5');
+('912503a8-b8f7-4573-9c9e-5a09169dba10', '4105f8cb-112d-44a6-8d06-41989dd14a92', '3a9a9c9d-f64f-43a5-b74d-948756dbc9b9'),
+('a297bf75-fdab-4339-a96c-57b7295b8cc5', '42d9523f-a62e-4f0d-a4af-a821167a0f35', 'ed223149-fece-48ea-807d-1e9891825d5b'),
+('a4cbacf8-63de-4cd7-a709-b2f0e529ecaa', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', 'ae3fd3d9-6f43-4131-b4c2-4401f0195688'),
+('ab62f9dc-b581-402d-a771-d1980ff76885', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'ed223149-fece-48ea-807d-1e9891825d5b'),
+('b324854d-0dff-4c9a-9047-a5ee2f613ffc', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '59f78980-68ee-47bf-9d86-48a4dc6dfae2'),
+('b4b2c38b-a415-4f1f-bab3-249d35eacff5', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'ae3fd3d9-6f43-4131-b4c2-4401f0195688'),
+('b5b6a90c-9056-43f2-8294-64c13efce81c', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', 'ed223149-fece-48ea-807d-1e9891825d5b'),
+('d0551e2c-b01f-4ab6-bb96-0ed03b947a96', '2d16d379-3a35-4fa2-b6db-6fd74808a3e5', '98a5c72b-614d-4e2d-8f46-b27c3b80719e'),
+('d145cd23-aba9-4127-b12f-34b98ee07ac4', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', '59f78980-68ee-47bf-9d86-48a4dc6dfae2'),
+('d24ed44c-0a19-47c1-95b1-d401172dbadb', '42d9523f-a62e-4f0d-a4af-a821167a0f35', '0a259ce5-e7f4-4515-8db5-5d69bc619bd5'),
+('dbe95e11-4f6d-4c27-b562-ac9044212e4d', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', '11c441eb-439f-45f1-aa2a-bf20cc651779'),
+('f3dde775-de3b-4890-bfa8-663f35fbeb63', '4105f8cb-112d-44a6-8d06-41989dd14a92', '11c441eb-439f-45f1-aa2a-bf20cc651779');
 
 -- --------------------------------------------------------
 
@@ -231,7 +256,7 @@ CREATE TABLE `users` (
   `last_name` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
   `mother_last_name` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
   `about` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `email` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `theme` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 1,
   `deleted` tinyint(1) NOT NULL DEFAULT 0,
@@ -244,8 +269,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `user`, `password`, `name`, `last_name`, `mother_last_name`, `about`, `email`, `theme`, `active`, `deleted`, `created`, `modified`) VALUES
-('4b8d094c-eab6-47c2-a3ee-e90a7e5ecf02', '4ab19130-67fa-418c-9f39-513d1325977b', 'jorge', '$2y$10$ycQFcU/tLkVP3d41v5TVF.xPHLj2CZEa.rn3Gq7dPOcL9OtAppXeu', 'Jorge', 'Itza', 'Gomez', NULL, 'jorgeitza023@gmail.com', 'light', 1, 0, '2021-05-24 14:58:01', '2021-05-26 12:32:44'),
-('fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'admin', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Jodelle', 'Ferland', 'Micah', NULL, 'alessagillespie9y@hotmail.com', 'dark', 1, 0, '2021-05-10 14:07:37', '2021-09-15 13:18:06');
+('374c14b4-9989-47d2-8fa4-da2dad32cb69', '54a73610-9e57-4714-a448-7f488df29a5a', 'mariana', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Mariana', 'Hernandez', 'Sandoval', NULL, 'mariana@gmail.com', 'light', 1, 0, '2021-09-16 03:14:58', '2021-09-16 03:25:29'),
+('4b8d094c-eab6-47c2-a3ee-e90a7e5ecf02', '4ab19130-67fa-418c-9f39-513d1325977b', 'jorge', '$2y$10$ycQFcU/tLkVP3d41v5TVF.xPHLj2CZEa.rn3Gq7dPOcL9OtAppXeu', 'Jorge', 'Itza', 'Gomez', NULL, 'jorgeitza023@gmail.com', 'dark', 1, 0, '2021-05-24 14:58:01', '2021-09-15 23:41:19'),
+('559c4399-d692-4834-ada3-7432f4477e76', '2d16d379-3a35-4fa2-b6db-6fd74808a3e5', 'alex', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Alex', 'Shepherd', 'G', NULL, 'jorgeitza098@hotmail.com', 'light', 1, 0, '2021-09-16 02:36:23', '2021-09-16 03:54:39'),
+('e055e238-a0d5-4983-8e05-48c3f665d54e', '42d9523f-a62e-4f0d-a4af-a821167a0f35', 'cheryl', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Cheryl', 'Mason', 'M', NULL, 'cheryl@gmail.com', 'light', 1, 0, '2021-09-16 03:13:45', '2021-09-16 04:08:22'),
+('e27761da-d185-4e05-a12e-605bdd52a9e0', 'b44e618c-c4a6-47df-8a32-2921ad3f5206', 'alessa', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Alessa', 'Gillespie', 'G', NULL, 'alessagillespie9y@hotmail.com', NULL, 1, 0, '2021-09-16 02:37:37', '2021-09-16 02:37:37'),
+('fba56bd9-b1c2-11eb-ae70-0021ccb8b7e2', '4105f8cb-112d-44a6-8d06-41989dd14a92', 'admin', '$2y$10$EJ.QRFNxRxDVXhgAMO47Eeg1e3cKzeI4rSey0KoyEPfqk448PlXN.', 'Jodelle', 'Ferland', 'Micah', NULL, 'alessagillespie9y@hotmail.com', 'dark', 1, 0, '2021-05-10 14:07:37', '2021-09-16 01:45:37');
 
 --
 -- Índices para tablas volcadas
