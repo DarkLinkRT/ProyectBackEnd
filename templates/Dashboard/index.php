@@ -323,11 +323,17 @@
                                                                 '  <button type="button" class="btn btn-outline-info dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
+                                                                    <?php if( $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
-                                                                    '<a data-toggle="modal" data-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            <?php if( $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
+                                                                            '<a data-toggle="modal" data-target="#edit1'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                            <?php } ?>
+                                                                            <?php if( $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
                                                                             ' <a data-toggle="modal" data-target="#delete1'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                            <?php } ?>
                                                                         '</div>'+
                                                                 '  </div>'+
+                                                                    <?php } ?>
                                                         ' </div>'+
                                                         '<p style="font-size:16px"><b>' + data[indice]['title'] + '</b></p>'+
                                                         '<p>' + data[indice]['description'] + '</p>'+
@@ -459,10 +465,16 @@
                                                                 '  <button type="button" class="btn btn-outline-info dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
                                                                     '  <i class="feather icon-settings"></i> '+
                                                                     '  </button>'+
+                                                                    <?php if( $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
                                                                     '  <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">'+
+                                                                        <?php if( $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
                                                                             '<a data-toggle="modal" data-target="#edit2'+data[indice]['id']+'" class="dropdown-item" href="#">Editar</a>'+
+                                                                        <?php } ?>
+                                                                        <?php if( $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
                                                                             ' <a data-toggle="modal" data-target="#delete2'+data[indice]['id']+'" class="dropdown-item" href="#">Eliminar</a>'+
+                                                                        <?php } ?>
                                                                         '</div>'+
+                                                                    <?php } ?>
                                                                 '  </div>'+
                                                         ' </div>'+
                                                         '<p style="font-size:16px"><b>' + data[indice]['title'] + '</b></p>'+
