@@ -30,7 +30,7 @@
         <div class="col-12">
             <div class="row col-12">
                 <?= $this->Html->link('<button type="button" class="btn btn-flat-primary border-primary text-primary mr-1 mb-1 waves-effect waves-light"><span><i class="feather icon-plus"></i> Nuevo </span></button>', ['action' => 'add'], ['escape'=> false]) ?>
-                <?= $this->Html->link('<button type="button" class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">Ver Inactivos</button>', ['action' => 'inactives'], ['escape'=> false]) ?>
+                <!-- < ?= $this->Html->link('<button type="button" class="btn btn-outline-danger mr-1 mb-1 waves-effect waves-light">Ver Inactivos</button>', ['action' => 'inactives'], ['escape'=> false]) ?> -->
             </div>
             <p class="card-text">Administra los usuarios que tienen acceso al sistema.</p>
             <!-- Lista de usuarios -->
@@ -46,7 +46,7 @@
                             <div class="card-content">
                                 <div class="card-body text-center">
                                     <h4><?= $user->name . " " . $user->last_name ?></h4>
-                                    <p class=""> <i class="feather <?= $user->co_group->icon ?> text-<?= $user->co_group->color_icon ?>"></i> <?= $user->co_group->name ?></p>
+                                    <p class=""> <i class="feather <?= $user->role->icon ?> text-<?= $user->role->color_icon ?>"></i> <?= $user->role->name ?></p>
                                     <div class="card-btns d-flex justify-content-between">
                                         <?= $this->Html->link('<button class="btn gradient-light-primary waves-effect waves-light">Editar</button>', ['action' => 'edit', $user->id],['escape'=>false]) ?>
                                         <?= $this->Html->link('<button class="btn btn-outline-danger waves-effect waves-light">Eliminar</button>', [ $user->id],['escape'=>false,  'data-toggle'=>'modal', 'data-target' =>'#deletedata' . $user->id]) ?>

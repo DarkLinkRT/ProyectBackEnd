@@ -51,12 +51,6 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Usuario</label>
-                                                            <input type="text" class="form-control" value="<?= $user->user ?>" name="user" placeholder="Usuario"  required="">
-                                                        <div class="help-block"></div></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="controls">
                                                             <label>Nombre</label>
                                                             <input type="text" class="form-control" value="<?= $user->name ?>" name="name" placeholder="Nombre(s)" required="">
                                                         <div class="help-block"></div></div>
@@ -70,57 +64,35 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>Apellido Materno</label>
-                                                            <input type="text" class="form-control" value="<?= $user->mother_last_name ?>" name="mother_last_name" placeholder="Apellido Materno">
+                                                            <input type="text" class="form-control" value="<?= $user->mother_last_name ?>"  name="mother_last_name" placeholder="Apellido Materno">
                                                         <div class="help-block"></div></div>
                                                     </div>
+                                                    
                                                 </div>
                                                 <div class="col-12 col-sm-6">
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Usuario</label>
+                                                            <input type="text" class="form-control" value="<?= $user->user ?>" name="user" placeholder="Usuario"  required="">
+                                                        <div class="help-block"></div></div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <label>Rol</label>
                                                         <select class="form-control select2-icons" name="co_group_id">
-                                                            <?php foreach($coGroups as $group){ ?>
-                                                                <?php if($group->id == $user->co_group_id){ ?>
-                                                                    <option selected data-icon="feather <?= $group->icon ?>  text-<?= $group->color_icon ?>" value="<?= $group->id ?>"><?= $group->name ?></option>
+                                                            <?php foreach($roles as $rol){ ?>
+                                                                <?php if($rol->id == $user->role_id){ ?>
+                                                                    <option selected data-icon="feather <?= $rol->icon ?>  text-<?= $rol->color_icon ?>" value="<?= $rol->id ?>"><?= $rol->name ?></option>
                                                                 <?php } else {?>
-                                                                    <option data-icon="feather <?= $group->icon ?>  text-<?= $group->color_icon ?>" value="<?= $group->id ?>"><?= $group->name ?></option>
+                                                                    <option data-icon="feather <?= $rol->icon ?>  text-<?= $rol->color_icon ?>" value="<?= $rol->id ?>"><?= $rol->name ?></option>
                                                                 <?php } ?>
                                                             <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Genero</label>
-                                                        <select class="form-control select2" name="gender_id">
-                                                            <?php foreach($genders as $gender){ ?>
-                                                                <?php if($gender->id == $user->gender_id){ ?>
-                                                                    <option selected value="<?= $gender->id ?>"><?= $gender->name ?></option>
-                                                                <?php } else { ?>
-                                                                    <option value="<?= $gender->id ?>"><?= $gender->name ?></option>
-                                                                <?php } ?>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Municipio</label>
-                                                        <select class="form-control" name="cat_municipality_id" id="cat_municipality_id">
-                                                            <?php foreach($catMunicipalities as $municipality){ ?>
-                                                                <?php if($municipality->id == $user->cat_locality->cat_municipality_id){ ?>
-                                                                    <option selected value="<?= $municipality->id ?>"><?= $municipality->name ?></option>
-                                                                <?php } else { ?>
-                                                                    <option value="<?= $municipality->id ?>"><?= $municipality->name ?></option>
-                                                                <?php } ?>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Localidad</label>
-                                                        <select class="form-control select2" name="cat_locality_id" id="cat_locality_id">
-                                                            <option value="0">Seleccione uno</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Domicilio</label>
-                                                            <input type="text" class="form-control" value="<?= $user->domicilio ?>" placeholder="Domicilio" name="domicilio">
+                                                            <label>Correo</label>
+                                                            <input type="email" class="form-control" value="<?= $user->email ?>" name="email" placeholder="Correo Electrónico">
                                                         <div class="help-block"></div></div>
                                                     </div>
                                                 </div>

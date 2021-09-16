@@ -82,8 +82,8 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('El Usuario no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $Roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
-        $this->set(compact('user', 'Roles'));
+        $roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
+        $this->set(compact('user', 'roles'));
     }
 
     /**
@@ -107,8 +107,8 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('El Usuario no pudo ser guardado. Por favor, intente de nuevo.'));
         }
-        $Roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
-        $this->set(compact('user', 'Roles'));
+        $roles = $this->Users->Roles->find('all',['conditions'=>['active'=>1,'deleted'=>0],'order'=>['name' => 'ASC']]);
+        $this->set(compact('user', 'roles'));
     }
 
     /**

@@ -46,12 +46,6 @@
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Usuario</label>
-                                                            <input type="text" class="form-control" name="user" placeholder="Usuario"  required="">
-                                                        <div class="help-block"></div></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="controls">
                                                             <label>Nombre</label>
                                                             <input type="text" class="form-control"  name="name" placeholder="Nombre(s)" required="">
                                                         <div class="help-block"></div></div>
@@ -70,46 +64,30 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Contraseña</label>
-                                                            <input type="password" class="form-control"  name="password" placeholder="Contraseña">
+                                                            <label>Correo</label>
+                                                            <input type="email" class="form-control"  name="email" placeholder="Correo Electrónico">
                                                         <div class="help-block"></div></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
                                                     <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Usuario</label>
+                                                            <input type="text" class="form-control" name="user" placeholder="Usuario"  required="">
+                                                        <div class="help-block"></div></div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label>Rol</label>
                                                         <select class="form-control select2-icons" name="co_group_id">
-                                                            <?php foreach($coGroups as $group){ ?>
-                                                                <option data-icon="feather <?= $group->icon ?>  text-<?= $group->color_icon ?>" value="<?= $group->id ?>"><?= $group->name ?></option>
+                                                            <?php foreach($roles as $rol){ ?>
+                                                                <option data-icon="feather <?= $rol->icon ?>  text-<?= $rol->color_icon ?>" value="<?= $rol->id ?>"><?= $rol->name ?></option>
                                                             <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Genero</label>
-                                                        <select class="form-control select2" name="gender_id">
-                                                            <?php foreach($genders as $gender){ ?>
-                                                                <option value="<?= $gender->id ?>"><?= $gender->name ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Municipio</label>
-                                                        <select class="form-control" name="cat_municipality_id" id="cat_municipality_id">
-                                                            <?php foreach($catMunicipalities as $municipality){ ?>
-                                                                <option value="<?= $municipality->id ?>"><?= $municipality->name ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Localidad</label>
-                                                        <select class="form-control select2" name="cat_locality_id" id="cat_locality_id">
-                                                            <option value="0">Seleccione uno</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="controls">
-                                                            <label>Domicilio</label>
-                                                            <input type="text" class="form-control" placeholder="Domicilio" name="domicilio">
+                                                            <label>Contraseña</label>
+                                                            <input type="password" class="form-control"  name="password" placeholder="Contraseña">
                                                         <div class="help-block"></div></div>
                                                     </div>
                                                 </div>
