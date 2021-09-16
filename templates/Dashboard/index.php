@@ -25,16 +25,22 @@
                                         </button>
                                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                             <ul class="navbar-nav justify-content-around w-75 ml-sm-auto">
-                                                <li class="nav-item px-sm-0" id="ultimas_noticias">
-                                                    <a style="color:#7367f0" class="nav-link font-small-3">Últimas publicaciones</a>
-                                                </li>
-                                                <li class="nav-item px-sm-0" id="mi_perfil">
-                                                    <button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Perfil</button>
-                                                    <!-- <a style="color:#7367f0" class="nav-link font-small-3">Perfil</a> -->
-                                                </li>
-                                                <li class="nav-item px-sm-0" id="mis_ajustes">
-                                                    <a style="color:#7367f0" class="nav-link font-small-3">Ajustes</a>
-                                                </li>
+                                                <?php if( $userData["roleId"] == "54a73610-9e57-4714-a448-7f488df29a5a" || $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
+                                                    <?php if( $userData["roleId"] == "54a73610-9e57-4714-a448-7f488df29a5a" || $userData["roleId"] == "4ab19130-67fa-418c-9f39-513d1325977b" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
+                                                        <li class="nav-item px-sm-0" id="ultimas_noticias">
+                                                            <a style="color:#7367f0" class="nav-link font-small-3">Últimas publicaciones</a>
+                                                        </li>
+                                                    <?php } ?>
+                                                    <?php if( $userData["roleId"] == "4ab19130-67fa-418c-9f39-513d1325977b" || $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35"  || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92"){ ?>
+                                                        <li class="nav-item px-sm-0" id="mi_perfil">
+                                                            <button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Perfil</button>
+                                                            <!-- <a style="color:#7367f0" class="nav-link font-small-3">Perfil</a> -->
+                                                        </li>
+                                                    <?php } ?>
+                                                    <li class="nav-item px-sm-0" id="mis_ajustes">
+                                                        <a style="color:#7367f0" class="nav-link font-small-3">Ajustes</a>
+                                                    </li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </nav>
@@ -42,70 +48,79 @@
                             </div>
                         </div>
                     </div>
-                    <section id="mis_publicaciones_section">
-                        <div class="row">
-                            <div class="col-lg-3 col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Acerca de mi</h4>
-                                        <i class="feather icon-more-horizontal cursor-pointer"></i>
-                                    </div>
-                                    <div class="card-body">
-                                        <p><?= $userData["about"] ?></p>
-                                        <div class="mt-1">
-                                            <h6 class="mb-0">Se unió:</h6>
-                                            <p><?= h($userData["created"]) ?></p>
+                    <?php if( $userData["roleId"] == "2d16d379-3a35-4fa2-b6db-6fd74808a3e5" ){ ?>
+                        <section>
+        
+                            <?= $this->Html->link('<button type="button" class="btn btn-flat-primary border-primary text-primary mr-1 mb-1 waves-effect waves-light"><span><i class="feather icon-plus"></i> Nueva publicación </span></button>', ['controller' => 'Posts' ,'action' => 'add'], ['escape'=> false]) ?>
+                        </section>
+                    <?php } ?>
+                    <?php if( $userData["roleId"] == "54a73610-9e57-4714-a448-7f488df29a5a" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92" || $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35"){ ?>
+                        <?php if($userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92" || $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35"){ ?>
+                        <section id="mis_publicaciones_section">
+                            <div class="row">
+                                <div class="col-lg-3 col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>Acerca de mi</h4>
+                                            <i class="feather icon-more-horizontal cursor-pointer"></i>
                                         </div>
-                                        <!-- <div class="mt-1">
-                                            <h6 class="mb-0">Lives:</h6>
-                                            <p>New York, USA</p>
-                                        </div> -->
-                                        <div class="mt-1">
-                                            <h6 class="mb-0">Correo:</h6>
-                                            <p><?= $userData["email"] ?></p>
+                                        <div class="card-body">
+                                            <p><?= $userData["about"] ?></p>
+                                            <div class="mt-1">
+                                                <h6 class="mb-0">Se unió:</h6>
+                                                <p><?= h($userData["created"]) ?></p>
+                                            </div>
+                                            <!-- <div class="mt-1">
+                                                <h6 class="mb-0">Lives:</h6>
+                                                <p>New York, USA</p>
+                                            </div> -->
+                                            <div class="mt-1">
+                                                <h6 class="mb-0">Correo:</h6>
+                                                <p><?= $userData["email"] ?></p>
+                                            </div>
+                                            <!-- <div class="mt-1">
+                                                <h6 class="mb-0">Website:</h6>
+                                                <p>www.pixinvent.com</p>
+                                            </div> -->
+                                            <!-- <div class="mt-1">
+                                                <button type="button" class="btn btn-sm btn-icon btn-primary mr-25 p-25 waves-effect waves-light"><i class="feather icon-facebook"></i></button>
+                                                <button type="button" class="btn btn-sm btn-icon btn-primary mr-25 p-25 waves-effect waves-light"><i class="feather icon-twitter"></i></button>
+                                                <button type="button" class="btn btn-sm btn-icon btn-primary p-25 waves-effect waves-light"><i class="feather icon-instagram"></i></button>
+                                            </div> -->
                                         </div>
-                                        <!-- <div class="mt-1">
-                                            <h6 class="mb-0">Website:</h6>
-                                            <p>www.pixinvent.com</p>
-                                        </div> -->
-                                        <!-- <div class="mt-1">
-                                            <button type="button" class="btn btn-sm btn-icon btn-primary mr-25 p-25 waves-effect waves-light"><i class="feather icon-facebook"></i></button>
-                                            <button type="button" class="btn btn-sm btn-icon btn-primary mr-25 p-25 waves-effect waves-light"><i class="feather icon-twitter"></i></button>
-                                            <button type="button" class="btn btn-sm btn-icon btn-primary p-25 waves-effect waves-light"><i class="feather icon-instagram"></i></button>
-                                        </div> -->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <div class="card" style="margin-bottom:10px !important" id="cardNuevo">
-                                    <div class="card-body" style="padding: 0.5rem;">
-                                        <div class="">
-                                            <div class="default-collapse collapse-bordered">
-                                                <div class="card collapse-header">
-                                                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                                        <span class="lead collapse-title">
-                                                            Crear publicación <i style="margin-left:10px" class="feather icon-edit"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                                                        <div class="card-content">
-                                                            <div class="card-body">
-                                                                <div class="">
-                                                                    <fieldset class="form-label-group">
-                                                                        <input type="text" class="form-control" id="title_post" placeholder="Título">
-                                                                        <label for="floating-label1">Título</label>
-                                                                    </fieldset>
-                                                                </div>
-                                                                <div class="">
-                                                                    <fieldset class="form-label-group mb-0">
-                                                                        <textarea class="form-control char-textarea active" id="description_post" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none"></textarea>
-                                                                        <label for="textarea-counter">Descripción</label>
-                                                                    </fieldset>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light" id="post_name">Publicar</button>
+                                <div class="col-lg-6 col-12">
+                                    <div class="card" style="margin-bottom:10px !important" id="cardNuevo">
+                                        <div class="card-body" style="padding: 0.5rem;">
+                                            <div class="">
+                                                <div class="default-collapse collapse-bordered">
+                                                    <div class="card collapse-header">
+                                                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                                            <span class="lead collapse-title">
+                                                                Crear publicación <i style="margin-left:10px" class="feather icon-edit"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                                                            <div class="card-content">
+                                                                <div class="card-body">
+                                                                    <div class="">
+                                                                        <fieldset class="form-label-group">
+                                                                            <input type="text" class="form-control" id="title_post" placeholder="Título">
+                                                                            <label for="floating-label1">Título</label>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <fieldset class="form-label-group mb-0">
+                                                                            <textarea class="form-control char-textarea active" id="description_post" rows="5" placeholder="Descripción" style="color: rgb(78, 81, 84);resize:none"></textarea>
+                                                                            <label for="textarea-counter">Descripción</label>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light" id="post_name">Publicar</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -115,80 +130,82 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="areaNoticiasUser"></div>
                                 </div>
-                                <div id="areaNoticiasUser"></div>
-                            </div>
-                            <div class="col-lg-3 col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Últimas fotos</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-01.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-02.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-03.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-04.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-05.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-06.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-07.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-08.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
-                                            </div>
-                                            <div class="col-md-4 col-6 user-latest-img">
-                                                <img src="<?= $this->Url->Image('user/user-09.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                <div class="col-lg-3 col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>Últimas fotos</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-01.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-02.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-03.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-04.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-05.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-06.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-07.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-08.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
+                                                <div class="col-md-4 col-6 user-latest-img">
+                                                    <img src="<?= $this->Url->Image('user/user-09.jpg') ?>" class="img-fluid mb-1 rounded-sm" alt="avtar img holder">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
+                        <?php } ?>
 
-                    <section id="noticias_section" style="display:none">
-                        <div class="row">
-                            <div class="col-lg-2 col-12">
+                        <?php if( $userData["roleId"] == "54a73610-9e57-4714-a448-7f488df29a5a" || $userData["roleId"] == "b44e618c-c4a6-47df-8a32-2921ad3f5206" || $userData["roleId"] == "4105f8cb-112d-44a6-8d06-41989dd14a92" || $userData["roleId"] == "42d9523f-a62e-4f0d-a4af-a821167a0f35"){ ?>
+                        <section id="noticias_section" style="display:none">
+                            <div class="row">
+                                <div class="col-lg-2 col-12">
+                                    
+                                </div>
+                                <div class="col-lg-8 col-12">
+
+                                    <div id="areaNoticias"></div>
                                 
-                            </div>
-                            <div class="col-lg-8 col-12">
-
-                                <div id="areaNoticias"></div>
-                            
-                            </div>
-                            <div class="col-lg-2 col-12">
-                               
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="ajustes_section" style="display:none">
-                        <div class="row">
-                            <div class="col-lg-3 col-12">
+                                </div>
+                                <div class="col-lg-2 col-12">
                                 
+                                </div>
                             </div>
-                            <div class="col-lg-6 col-12">
+                        </section>
+                        <?php } ?>
+                        <section id="ajustes_section" style="display:none">
+                            <div class="row">
+                                <div class="col-lg-3 col-12">
+                                    
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    
+                                </div>
+                                <div class="col-lg-3 col-12">
                                 
+                                </div>
                             </div>
-                            <div class="col-lg-3 col-12">
-                               
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    <?php } ?>
 
 
 
@@ -452,7 +469,7 @@
                                                         '<p>' + data[indice]['description'] + '</p>'+
                                                         //' <img class="img-fluid card-img-top rounded-sm mb-2" src="../../../app-assets/images/profile/post-media/2.jpg" alt="avtar img holder">'+
                                                     '</div>'+
-                                                    '<div class="modal fade text-left" id="edit2'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" style="display: none;">'+
+                                                    '<div class="modal fade text-left" id="edit2'+data[indice]['id']+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">'+
                                                         ' <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">'+
                                                             '  <div class="modal-content">'+
                                                                 '  <div class="modal-header">'+

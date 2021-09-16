@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Rol</label>
-                                                        <select class="form-control select2-icons" name="co_group_id">
+                                                        <select class="form-control select2-icons" name="role_id">
                                                             <?php foreach($roles as $rol){ ?>
                                                                 <option data-icon="feather <?= $rol->icon ?>  text-<?= $rol->color_icon ?>" value="<?= $rol->id ?>"><?= $rol->name ?></option>
                                                             <?php } ?>
@@ -140,28 +140,6 @@
             $('#actives').val("1");
         }
     }
-
-    
-    /***************/var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;/********************* */
-           
-    $('#cat_municipality_id').change(function(){
-        var id_municipality =  $(this).val();
-        $.ajax({
-            headers: {
-                    'X-CSRF-Token': csrfToken
-                },    
-                type: "GET",
-                url: "<?= $this->Url->build(["controller" => "CatLocalities","action" => "getLocalitiesByMunicipality"]);?>" + "/" + id_municipality,
-                success:function(data){
-                    $('#cat_locality_id').empty();
-                    $(data).each(function(indice,registro){        
-                        $('#cat_locality_id').append('<option value="'+data[indice]['id']+'"> '+data[indice]['name']+' </option>');
-                    })
-                }
-        })
-    })
-
-    $('#cat_municipality_id').change();
 
 </script>
  

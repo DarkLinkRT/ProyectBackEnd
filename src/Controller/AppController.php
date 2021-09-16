@@ -97,6 +97,7 @@ class AppController extends Controller
         $userData["lastname"] =  $this->request->getSession()->read('Auth.User.last_name');
         $userData["user"] =  $this->request->getSession()->read('Auth.User.user');
         $userData["roleUser"] =  $this->request->getSession()->read('Auth.User.role.name');
+        $userData["roleId"] =  $this->request->getSession()->read('Auth.User.role_id');
         $userData["id"] =  $this->request->getSession()->read('Auth.User.id');
         $userData["about"] =  $this->request->getSession()->read('Auth.User.about');
         $userData["email"] =  $this->request->getSession()->read('Auth.User.email');

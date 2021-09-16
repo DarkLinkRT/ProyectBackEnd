@@ -98,26 +98,10 @@ class UsersTable extends Table
             ->notEmptyString('mother_last_name');
 
         $validator
-            ->scalar('picture')
-            ->maxLength('picture', 4294967295)
-            ->requirePresence('picture', 'create')
-            ->notEmptyString('picture');
-
-        $validator
-            ->scalar('domicilio')
-            ->allowEmptyString('domicilio');
-
-        $validator
-            ->dateTime('last_access')
-            ->allowEmptyDateTime('last_access');
-
-        $validator
             ->boolean('active')
             ->notEmptyString('active');
 
-        $validator
-            ->boolean('deleted')
-            ->notEmptyString('deleted');
+    
 
         return $validator;
     }

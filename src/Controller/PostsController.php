@@ -78,12 +78,13 @@ class PostsController extends AppController
         $post = $this->Posts->newEmptyEntity();
         if ($this->request->is('post')) {
             $post = $this->Posts->patchEntity($post, $this->request->getData());
+            $post->user_id = $this->request->getSession()->read('Auth.User.id');
             if ($this->Posts->save($post)) {
-                $this->Flash->success(__('The post has been saved.'));
+                $this->Flash->success(__('La publicación se publicó.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect([ 'controller' => 'Dashboard' , 'action' => 'index']);
             }
-            $this->Flash->error(__('The post could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo agregar la publicación, intente de nuevo.'));
         }
         $users = $this->Posts->Users->find('list', ['limit' => 200]);
         $this->set(compact('post', 'users'));

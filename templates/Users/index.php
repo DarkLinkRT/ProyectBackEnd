@@ -36,8 +36,8 @@
             <!-- Lista de usuarios -->
             <div class="row">
                 <?php foreach ($users as $user): ?>
-                    <div class="col-xl-4 col-md-6 col-sm-12 profile-card-1">
-                        <div class="card" style="height: 329.188px;">
+                    <div class="col-xl-4 col-md-6 col-sm-12 profile-card-1" style="padding-bottom: 20px">
+                        <div class="card" style="margin:0 !important ">
                             <div class="card-header mx-auto">
                                 <div class="avatar avatar-xl">
                                     <img class="img-fluid" src="<?= hasPic($user->id) ? $this->Url->Image('/files/userfiles/'.$userData["id"].'/picture/200.jpg') : $this->Url->Image('/files/default/defaultpic.jpg') ?>" alt="img placeholder">
